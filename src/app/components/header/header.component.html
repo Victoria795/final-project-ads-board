@@ -1,1 +1,24 @@
-<p>header works!</p>
+<div class="header">
+<ng-container *ngIf="isAuthorised; else notAuthorised">
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <button pButton class="p-button-text user-btn" (click)="menu.toggle($event)">
+        <i class="pi pi-user"></i>
+        Алексей
+        <i class="pi pi-chevron-down"></i>
+      </button>
+    <button pButton class="new-ad-btn" routerLink="/create-ad">
+        Новое объявление
+        <i class="pi pi-plus"></i>
+    </button> 
+</ng-container>   
+<ng-template #notAuthorised>
+    <button pButton class="p-button-text user-btn" (click)="showAuthorizationDialog()">
+        <i class="pi pi-user"></i>
+         Войти
+      </button>
+    <button pButton class="new-ad-btn" (click)="showAuthorizationDialog()">
+        Новое объявление
+        <i class="pi pi-plus"></i>
+    </button>   
+</ng-template>
+</div>

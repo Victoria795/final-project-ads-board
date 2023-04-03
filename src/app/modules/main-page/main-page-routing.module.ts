@@ -10,8 +10,7 @@ const routes: Routes = [
     component: RecommendationsComponent,
   },
   {
-    path: 'view',
-    pathMatch: 'full',
+    path: 'ad-view',
     component: AdViewComponent,
   },
 

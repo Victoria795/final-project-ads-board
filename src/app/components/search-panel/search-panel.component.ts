@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext'
 
 @Component({
   selector: 'app-search-panel',
@@ -8,3 +10,14 @@ import { Component } from '@angular/core';
 export class SearchPanelComponent {
 
 }
+@NgModule({
+  declarations: [SearchPanelComponent],
+  imports: [
+    ButtonModule,
+    InputTextModule
+  ],
+  exports: [SearchPanelComponent],
+  providers: [],
+})
+
+export class SearchPanelComponentModule {}

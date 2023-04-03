@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateAdComponent } from './create-ad/create-ad.component';
+import { MySettingsComponent } from './my-settings/my-settings.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: CreateAdComponent
-  },
+    component: MySettingsComponent
+  }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CreateAdRoutingModule { }
+export class MySettingsRoutingModule { }

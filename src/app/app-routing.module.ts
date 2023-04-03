@@ -17,7 +17,20 @@ const routes: Routes = [
         (m) => m.CreateAdModule
       )
   },
-
+  {
+    path: 'my-ads',
+    loadChildren: () =>
+      import('./modules/my-ads/my-ads.module').then(
+        (m) => m.MyAdsModule
+      )
+  },
+  {
+    path: 'my-settings',
+    loadChildren: () =>
+      import('./modules/my-settings/my-settings.module').then(
+        (m) => m.MySettingsModule
+      )
+  }
 
 ];
 

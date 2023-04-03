@@ -1,1 +1,44 @@
-<p>card works!</p>
+<ng-container *ngIf="ad; else skeleton">
+<div class="card" routerLink="ad-view">
+    <div class="image-wrapper">
+    <img [src]="ad.imgSrc" class="image">
+    </div>
+    <h4 class="title">{{ad.title}}</h4>
+    <p class="price">{{ad.price}}</p>
+    <p class="address">{{ad.address}}</p>
+    <p class="date">{{ad.createdAt}}</p>
+</div>
+</ng-container>
+
+<ng-template #skeleton>
+<div class="skeleton-wrapper">
+    <p-skeleton width="100%" height="240px"></p-skeleton>
+    <p-skeleton
+        class="skeleton-item"
+        styleClass="mb-2"
+        width="80%"
+        height="22px"
+    ></p-skeleton>
+    <p-skeleton
+        class="skeleton-item"
+        styleClass="mb-2"
+        width="60%"
+        height="22px"
+    ></p-skeleton>
+    <p-skeleton
+        class="skeleton-item"
+        styleClass="mb-2"
+        width="50%"
+        height="18px"
+    ></p-skeleton>
+    <p-skeleton
+        class="skeleton-item"
+        styleClass="mb-2"
+        width="40%"
+        height="18px"
+    ></p-skeleton>
+</div>
+</ng-template>
+
+
+

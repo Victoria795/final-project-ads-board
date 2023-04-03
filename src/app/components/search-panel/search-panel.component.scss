@@ -1,0 +1,27 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: solid 1px #E2E8F0;
+}
+.heading{
+    margin-right: 24px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #1E293B;      
+}
+button{
+    padding: 8px 12px;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.search{
+    margin-left: 12px;
+    flex: 1 0 0;
+}
+input{
+    padding: 8px 12px;
+    font-size: 14px;
+}
