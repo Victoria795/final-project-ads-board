@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 306px;
     height: 336px;
     margin-bottom: 8px;
     cursor: pointer;
@@ -48,9 +47,6 @@
         line-height: 24px;
         color: #64748B;
     }
-}
-.skeleton-wrapper{
-    width: 306px;
 }
 .skeleton-item{
     margin: 2px;

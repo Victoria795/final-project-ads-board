@@ -1,15 +1,15 @@
 <h3>Рекомендации для вас</h3>
     <div *ngIf="isLoading">
-        <div class="ads-container">
-            <div *ngFor="let item of skeleton">
+        <div class="grid">
+            <div class="col-3" *ngFor="let item of skeleton">
             <app-card></app-card>
             </div>
         </div>
     </div>
     
 <ng-container *ngIf="ads; else noAds">
-    <div class="ads-container">
-    <div  *ngFor="let ad of ads">
+    <div class="grid">
+    <div class="col-3" *ngFor="let ad of ads">
       <div>
        <app-card [ad]="ad"></app-card>
       </div>
