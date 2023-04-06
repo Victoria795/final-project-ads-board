@@ -1,5 +1,5 @@
 import { AuthorizationModalComponent } from './../../modals/authorization-modal/authorization-modal.component';
-import { Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
@@ -12,7 +12,8 @@ import { AuthorizationModalComponentModule } from 'src/app/modals/authorization-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
   

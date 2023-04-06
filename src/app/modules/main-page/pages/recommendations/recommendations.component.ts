@@ -4,7 +4,7 @@ import { IAd } from 'src/app/interfaces/i-ad';
 @Component({
   selector: 'app-recommendations',
   templateUrl: './recommendations.component.html',
-  styleUrls: ['./recommendations.component.scss']
+  styleUrls: ['./recommendations.component.scss'],
 })
 export class RecommendationsComponent implements OnInit {
 
