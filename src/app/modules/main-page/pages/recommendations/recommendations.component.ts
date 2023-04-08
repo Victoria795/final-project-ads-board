@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdvertService } from 'src/app/core/services/advert.service';
 import { IAd } from 'src/app/interfaces/i-ad';
 
 @Component({
@@ -9,23 +10,24 @@ import { IAd } from 'src/app/interfaces/i-ad';
 export class RecommendationsComponent implements OnInit {
 
   isLoading:boolean = true
-  ads:IAd[] = [] 
+  ads:any[] = [] 
   skeleton = new Array(20)
 
+  constructor(private _AdvertService: AdvertService) {}
+
   public ngOnInit(): void {
-    setTimeout(() => {
-        this.isLoading = false;
-        this.ads = new Array(20).fill({
-          id: 0,
-          title: 'Гитара Fender',
-          price: 20000,
-          imgSrc: 'https://placehold.co/600x400',
-          createdAt: 'Сегодня 14:12',
-          address: 'Москва',
-        });
-    }, 1500);
+    this._AdvertService.getAdverts()
+    .subscribe((response) => {
+      setTimeout(() => {
+        this.ads = response
+        this.isLoading = false
+      }, 1500)
+      
+    })
   }
 }
+
+
 
    
 

@@ -9,13 +9,12 @@ import { HeaderComponentModule } from './components/header/header.component';
 import { SearchPanelComponentModule } from './components/search-panel/search-panel.component';
 import { MyAdsModule } from './modules/my-ads/my-ads.module';
 import { MySettingsModule } from './modules/my-settings/my-settings.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [ AppComponent ],
     providers: [],
     bootstrap: [AppComponent],
     imports: [
@@ -27,8 +26,8 @@ import { MySettingsModule } from './modules/my-settings/my-settings.module';
         HeaderComponentModule,
         SearchPanelComponentModule,
         MyAdsModule,
-        MySettingsModule
-
+        MySettingsModule,
+        HttpClientModule
     ]
 })
 export class AppModule { }

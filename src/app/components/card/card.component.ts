@@ -11,7 +11,7 @@ import { SkeletonModule } from 'primeng/skeleton';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
-  @Input() ad: IAd | undefined;
+  @Input() ad: any | undefined;
 }
 @NgModule({
   declarations: [CardComponent],
