@@ -1,12 +1,12 @@
 <ng-container *ngIf="ad; else skeleton">
 <div class="card" routerLink="ad-view">
     <div class="image-wrapper">
-    <img [src]="" class="image">
+    <img [src]="ad.imageUrl" class="image">
     </div>
     <h4 class="title">{{ad.name}}</h4>
-    <p class="price">{{ad.name}}</p>
-    <p class="address">{{ad.name}}</p>
-    <p class="date">{{ad.name}}</p>
+    <p class="price">{{ad.price}}</p>
+    <p class="address">{{ad.address}}</p>
+    <p class="date">{{ad.createdAt}}</p>
 </div>
 </ng-container>
 

@@ -3,15 +3,29 @@ import { CommonModule } from '@angular/common';
 
 import { CreateAdRoutingModule } from './create-ad-routing.module';
 import { CreateAdComponent } from './create-ad/create-ad.component';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ButtonModule } from 'primeng/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddImageComponent } from './components/add-image/add-image.component';
+
+
 
 
 @NgModule({
   declarations: [
-    CreateAdComponent
+    CreateAdComponent,
+    AddImageComponent
   ],
   imports: [
     CommonModule,
-    CreateAdRoutingModule
+    CreateAdRoutingModule,
+    CascadeSelectModule,
+    InputTextModule,
+    InputNumberModule,
+    ButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class CreateAdModule { }

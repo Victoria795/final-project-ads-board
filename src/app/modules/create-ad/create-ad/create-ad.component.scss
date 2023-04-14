@@ -1,0 +1,41 @@
+h2{
+    margin: 24px 0;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1E293B;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    display: block;
+    width: 100%;
+    margin: 8px 0px;
+    font-size: 16px;
+    line-height: 24px;
+}
+textarea{
+    border-color: #CBD5E1;
+}
+label{
+    font-size: 16px;
+    line-height: 24px;
+    color: #1E293B;
+}
+button{
+    margin: 8px 0px;
+}
+.submit-warning{
+    font-size: 14px;
+    line-height: 20px;
+    color: #64748B;
+    a{
+        color: #3B82F6;
+    }
+}
+.add-image{
+    padding: 0;
+    margin: 8px 0;
+}

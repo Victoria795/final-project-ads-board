@@ -1,8 +1,9 @@
 export interface IAd {
-    id: number,
-    title: string,
-    price: number,
-    imgSrc: string,
-    createdAt: string,
-    address: string,
+    "id": string,
+    "name": string,
+    "price": number,
+    "imageUrl": string,
+    "address": string,
+    "createdAt": string,
+    "isActive": boolean
 }

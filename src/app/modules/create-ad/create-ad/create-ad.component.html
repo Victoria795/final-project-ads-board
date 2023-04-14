@@ -1,1 +1,73 @@
-<p>СОЗДАТЬ НОВОЕ ОБЪЯВЛЕНИЕ</p>
+<h2>Новое объявление</h2>
+<form [formGroup]="form">
+    <div class="grid">
+        <div class="col-4">
+            <label>Выберите категорию</label>
+            <p-cascadeSelect
+            class="input"
+            placeholder="Нажмите, чтобы выбрать"
+            formControlName="category">
+            </p-cascadeSelect>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-8">
+            <label>Название объявления</label>
+            <input
+            class="input" 
+            type="text" 
+            pInputText 
+            placeholder="Что хотите продать?"
+            formControlName="name"/>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-8">
+            <label>Описание</label>
+            <textarea
+            class="input"  
+            rows="5" 
+            cols="30" 
+            pInputTextarea
+            placeholder="Расскажите подробнее о товаре или услуге"
+            formControlName="description"></textarea>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-8">
+            <label>Адрес(место проведения сделки)</label>
+            <input 
+            class="input" 
+            type="text" 
+            pInputText 
+            placeholder="Начните вводить адрес"
+            formControlName="address"/>
+        </div>
+    </div>
+    <app-add-image formControlName="images" class="col-8 add-image"></app-add-image>
+    <div class="grid">
+        <div class="col-3">
+            <label>Цена</label>
+            <p-inputNumber
+            class="input" 
+            formControlName="price"
+            placeholder="0 ₽"
+            mode="currency"
+            currency="RUB"
+            currencyDisplay="symbol"
+            locale="ru-RU"
+            formControlName="price"
+          ></p-inputNumber>
+        </div>
+    </div>
+    <div>
+        <button 
+        pButton
+        (click)="submit()"
+        >Разместить объявление</button>
+        <div class="submit-warning">
+            Нажимая кнопку «Разместить объявление» <br>
+            Вы соглашаетесь с <a>правилами площадки</a>
+        </div>
+    </div>
+</form>

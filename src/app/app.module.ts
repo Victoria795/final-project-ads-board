@@ -27,7 +27,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
         SearchPanelComponentModule,
         MyAdsModule,
         MySettingsModule,
-        HttpClientModule
+        HttpClientModule,
     ]
 })
 export class AppModule { }

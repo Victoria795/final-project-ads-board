@@ -1,2 +1,25 @@
-<div>filter works!</div>
+<div>
+    <div class="grid">
+        <div class="col-3">
+             <ng-container *ngFor="let rootCategory of categories">
+                <div (click)="selectCategory(rootCategory)">
+                 {{rootCategory.name}}<i class ="pi pi-chevron-right"></i>
+                </div>
+             </ng-container>
+        </div>
+        <div class="col-9">
+          <div>
+           {{selectedCategory.name}}  <i class ="pi pi-chevron-right"></i>
+          </div>
+          <div class="grid">
+            <ng-container *ngFor="let category of selectedCategory?.child">
+                <div class="col-4">
+                    <div>{{category.name}}</div>
+                    <div></div>
+                </div>
+            </ng-container> 
+          </div>
+        </div>
+    </div>
+</div>
 
