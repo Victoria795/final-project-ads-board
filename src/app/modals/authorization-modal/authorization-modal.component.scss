@@ -1,3 +1,8 @@
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 .btn-group{
     display: flex;
     justify-content: center;
@@ -5,9 +10,22 @@
 }
 input{
     width: 100%;
-    margin-bottom: 16px;
 }
 button{
     margin-top: 8px;
     font-size: 16px;
+}
+.warning{
+    font-size: 14px;
+    line-height: 20px;
+    color: #EF4444;    
+}
+.input-invalid{
+    border-color: #EF4444;
+}
+:host ::ng-deep .input-invalid .p-inputtext{
+    border-color: #EF4444;
+}
+:host ::ng-deep .p-inputtext{
+    width: 100%;
 }

@@ -20,7 +20,7 @@ import { ButtonModule } from 'primeng/button';
     ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
-    NgIf
+    NgIf,
   ]
 })
 export class MySettingsModule { }

@@ -4,6 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { InputMaskModule } from 'primeng/inputmask';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-authorization-modal',
@@ -16,7 +18,7 @@ export class AuthorizationModalComponent {
 
  loginForm: FormGroup = new FormGroup({
   login: new FormControl<string>('',[Validators.required]),
-  password: new FormControl<string>('', [Validators.required]),
+  password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
 })
 
 registrationForm: FormGroup = new FormGroup({
@@ -39,7 +41,9 @@ register(){
     InputTextModule,
     ButtonModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    InputMaskModule,
+    NgClass
   ],
   exports: [AuthorizationModalComponent],
   providers: [],

@@ -17,7 +17,7 @@ import { AuthorizationModalComponentModule } from 'src/app/modals/authorization-
 })
 export class HeaderComponent {
   
-  isAuthorised:boolean = true;
+  isAuthorised:boolean = false;
 
   items: MenuItem[] = [
     {

@@ -13,6 +13,7 @@ import { AddImageComponent } from './components/add-image/add-image.component';
 
 
 
+
 @NgModule({
   declarations: [
     CreateAdComponent,
@@ -25,7 +26,7 @@ import { AddImageComponent } from './components/add-image/add-image.component';
     InputTextModule,
     InputNumberModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class CreateAdModule { }

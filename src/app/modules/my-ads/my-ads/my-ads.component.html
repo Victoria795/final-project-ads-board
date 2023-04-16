@@ -1,1 +1,22 @@
-<p>МОИ ОБЪЯВЛЕНИЯ</p>
+<h3>Мои объявления</h3>
+    <div *ngIf="isLoading">
+        <div class="grid">
+            <div class="col-3" *ngFor="let item of skeleton">
+            <app-card></app-card>
+            </div>
+        </div>
+    </div>
+    
+<ng-container *ngIf="ads; else noAds">
+    <div class="grid">
+    <div class="col-3">
+    <app-new-ad></app-new-ad>
+    </div>
+    <div class="col-3" *ngFor="let ad of ads">
+      <div>
+       <app-card [ad]="ad"></app-card>
+      </div>
+    </div>
+    </div>
+</ng-container>
+<ng-template #noAds><p>У вас пока нет объявлений</p></ng-template>

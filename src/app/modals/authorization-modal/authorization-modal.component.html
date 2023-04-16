@@ -1,17 +1,31 @@
 <ng-container *ngIf="isAuthenticated; else registration">
     <form [formGroup]="loginForm">
-    <input 
+    <div>
+    <p-inputMask
+    [ngClass]="{'input-invalid': loginForm.controls['login'].invalid && loginForm.controls['login'].touched}"
+    class="input" 
     type="text" 
-    pInputText 
+    mask="+7(999) 999-99-99"
     placeholder="Номер телефона"
     formControlName="login"
-    />
+    >
+    </p-inputMask>
+    <p 
+    *ngIf="loginForm.controls['login'].invalid && loginForm.controls['login'].touched" 
+    class="warning">Введите номер телефона</p>
+    </div>
+    <div>
     <input 
+    [ngClass]="{'input-invalid': loginForm.controls['password'].invalid && loginForm.controls['password'].touched}"
     type="password" 
     pInputText 
     placeholder="Пароль"
     formControlName="password"
     />
+    <p 
+    *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" 
+    class="warning">Введите пароль</p>
+    </div>
     <div class="btn-group">
     <button pButton>Войти</button>
     <button pButton (click)="isAuthenticated = false">Зарегистрироваться</button>
