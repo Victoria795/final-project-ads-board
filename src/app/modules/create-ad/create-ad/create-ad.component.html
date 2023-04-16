@@ -2,7 +2,7 @@
 <form [formGroup]="form">
     <div class="grid">
         <div class="col-4">
-            <label>Выберите категорию</label>
+            <label class="required">Выберите категорию</label>
             <p-cascadeSelect
             class="input"
             placeholder="Нажмите, чтобы выбрать"
@@ -12,7 +12,7 @@
     </div>
     <div class="grid">
         <div class="col-8">
-            <label>Название объявления</label>
+            <label class="required">Название объявления</label>
             <input
             class="input" 
             type="text" 
@@ -35,7 +35,7 @@
     </div>
     <div class="grid">
         <div class="col-8">
-            <label>Адрес(место проведения сделки)</label>
+            <label class="required">Адрес(место проведения сделки)</label>
             <input 
             class="input" 
             type="text" 

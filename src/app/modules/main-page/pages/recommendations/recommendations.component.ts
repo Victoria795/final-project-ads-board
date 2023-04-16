@@ -10,7 +10,7 @@ import { IAd } from 'src/app/interfaces/i-ad';
 export class RecommendationsComponent implements OnInit {
 
   isLoading:boolean = true
-  ads:any[] = [] 
+  ads:IAd[] = [] 
   skeleton = new Array(20)
 
   constructor(private _AdvertService: AdvertService) {}

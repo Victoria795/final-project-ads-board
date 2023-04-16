@@ -112,7 +112,7 @@ export class CategoryService {
       createdAt: '2023-04-07T15:52:30.262636Z',
     },
   ];
-  public getCategories():Observable<any[]> {
+  public getCategories():Observable<ICategory[]> {
     return of(this.mock).pipe(map(res => this.transformCategories(res)))
    } 
   private transformCategories(array: any[]): any {

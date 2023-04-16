@@ -21,8 +21,12 @@ textarea{
 }
 label{
     font-size: 16px;
-    line-height: 24px;
     color: #1E293B;
+}
+
+.required::after{
+    content: " *";
+    color: red;
 }
 button{
     margin: 8px 0px;

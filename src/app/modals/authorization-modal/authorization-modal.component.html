@@ -1,6 +1,56 @@
-<input type="text" pInputText placeholder="Номер телефона"/>
-<input type="password" pInputText placeholder="Пароль"/>
-<div class="btn-group">
-<button pButton>Войти</button>
-<button pButton>Зарегистрироваться</button>
-</div>
+<ng-container *ngIf="isAuthenticated; else registration">
+    <form [formGroup]="loginForm">
+    <input 
+    type="text" 
+    pInputText 
+    placeholder="Номер телефона"
+    formControlName="login"
+    />
+    <input 
+    type="password" 
+    pInputText 
+    placeholder="Пароль"
+    formControlName="password"
+    />
+    <div class="btn-group">
+    <button pButton>Войти</button>
+    <button pButton (click)="isAuthenticated = false">Зарегистрироваться</button>
+    </div>
+    </form>
+</ng-container>
+<ng-template #registration>
+    <form [formGroup]="registrationForm">
+        <input
+          type="text"
+          pInputText
+          placeholder="Номер телефона"
+          formControlName="login"
+        />
+        <input
+        type="text"
+        pInputText
+        placeholder="Имя"
+        formControlName="name"
+        />
+        <input
+          type="password"
+          pInputText
+          placeholder="Пароль"
+          formControlName="password"
+        />
+        <input
+          type="password"
+          pInputText
+          placeholder="Подтвердите пароль"
+          formControlName="confirmPassword"
+        />
+        <div class="btn-group">
+        <button
+        pButton
+        (click)="isAuthenticated = true"
+        >Войти
+        </button>
+        <button pButton (click)="register()">Зарегистрироваться</button>
+        </div>
+      </form>
+</ng-template>

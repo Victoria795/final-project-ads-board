@@ -1,0 +1,44 @@
+h3{
+    margin: 32px 0 24px 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: #1E293B;
+}
+.password-heading{
+    margin-top: 40px;
+}
+.input-group{
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    display: block;
+    width: 100%;
+    margin: 8px 0px;
+    font-size: 16px;
+    line-height: 24px;
+}
+label{
+    font-size: 16px;
+    color: #1E293B;
+    span{
+    color: #64748B;
+    }
+}
+button{
+    margin: 8px 0px;
+}
+.footer{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+.success-notification{
+    font-weight: 500;
+    font-size: 14px;
+    color: #22C55E;
+    i{
+     margin-right: 8px;
+    }
+}
+
