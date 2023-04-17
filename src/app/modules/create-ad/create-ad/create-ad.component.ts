@@ -62,7 +62,8 @@ export class CreateAdComponent {
     }
   const advert = this.form.value;
   this._advertService.createAdvert(advert);
+  console.log('SUBMIT', this.form.value);
   this.form.reset();
-    console.log('SUBMIT', this.form.value);
+    
   }
 }

@@ -1,5 +1,14 @@
+ <input 
+    class="file-input"
+    type="file" 
+    accept=".png, .jpg, .jpeg"
+    (change)="uploadImage($event)" #fileUpload>
 <div class="container">
-<p-button label="Добавить картинки" icon="pi pi-images" styleClass="p-button-sm"></p-button>
+<p-button 
+label="Добавить картинки" 
+icon="pi pi-images" 
+styleClass="p-button-sm"
+(click)="fileUpload.click()"></p-button>
 <div class="description">
     Максимум 10 картинок в формате jpeg, png или heic
 </div>
