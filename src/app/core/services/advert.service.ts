@@ -8,9 +8,15 @@ import { IAd } from 'src/app/interfaces/i-ad';
 })
 export class AdvertService {
 
+  endpoint: string = '/api/Advert';
+
   constructor( private _http: HttpClient) { }
 
   getAdverts():Observable<IAd[]>{
-    return this._http.get<IAd[]>('/api/Advert')
+    return this._http.get<IAd[]>(`${this.endpoint}`)
    }
+
+  createAdvert(advert: IAd):Observable<any>{
+    return this._http.post(`${this.endpoint}`, advert)
+  }
 }

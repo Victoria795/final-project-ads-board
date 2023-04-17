@@ -7,6 +7,7 @@ import { MenuItem } from 'primeng/api/menuitem';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AuthorizationModalComponentModule } from 'src/app/modals/authorization-modal/authorization-modal.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { AuthorizationModalComponentModule } from 'src/app/modals/authorization-
 })
 export class HeaderComponent {
   
-  isAuthorised:boolean = false;
+  isAuthorised:boolean = true;
 
   items: MenuItem[] = [
     {
@@ -29,15 +30,17 @@ export class HeaderComponent {
       routerLink: '/my-settings'
     },
     {
-      label: 'Выйти'
+      label: 'Выйти',
+      command: () => this._authService.logOut()
     }
   ]
   constructor(
-    private dialogService: DialogService
+    private _dialogService: DialogService,
+    private _authService: AuthService
   ) {}
   
   showAuthorizationDialog(){
-    this.dialogService.open(AuthorizationModalComponent,{
+    this._dialogService.open(AuthorizationModalComponent,{
     header: 'Авторизация',
     width: '416px',
       })

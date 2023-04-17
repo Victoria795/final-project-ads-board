@@ -6,6 +6,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { InputMaskModule } from 'primeng/inputmask';
 import { NgClass } from '@angular/common';
+import { DynamicDialogComponent } from 'primeng/dynamicdialog';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-authorization-modal',
@@ -14,7 +16,21 @@ import { NgClass } from '@angular/common';
 })
 export class AuthorizationModalComponent {
 
- isAuthenticated:boolean = true;
+  get isAuthenticated(): boolean {
+    return this._isAuthenticated;
+  }
+
+  set isAuthenticated(value: boolean) {
+    this._isAuthenticated = value;
+    this._dynamicDialogue.config.header = value ? 'Авторизация' : 'Регистрация';
+  }
+
+ private _isAuthenticated:boolean = true;
+
+constructor(
+  private _dynamicDialogue: DynamicDialogComponent,
+  private _authService: AuthService
+) {}
 
  loginForm: FormGroup = new FormGroup({
   login: new FormControl<string>('',[Validators.required]),
@@ -28,11 +44,23 @@ registrationForm: FormGroup = new FormGroup({
   confirmPassword: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
 })
 
+logIn(){
+  if(this.loginForm.invalid){
+    return
+  }
+  const user = this.loginForm.value;
+  this._authService.logIn(user);
+  this._dynamicDialogue.close();
+}
+
+
 register(){
   if (this.registrationForm.invalid) {
     return;
   }
-  console.log('SUBMIT', this.registrationForm.value);
+  const user = this.registrationForm.value;
+  this._authService.register(user);
+  this._dynamicDialogue.close();
 }
 }
 @NgModule({
@@ -41,9 +69,9 @@ register(){
     InputTextModule,
     ButtonModule,
     ReactiveFormsModule,
+    NgClass,
     NgIf,
     InputMaskModule,
-    NgClass
   ],
   exports: [AuthorizationModalComponent],
   providers: [],

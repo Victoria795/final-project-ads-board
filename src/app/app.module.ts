@@ -9,13 +9,20 @@ import { HeaderComponentModule } from './components/header/header.component';
 import { SearchPanelComponentModule } from './components/search-panel/search-panel.component';
 import { MyAdsModule } from './modules/my-ads/my-ads.module';
 import { MySettingsModule } from './modules/my-settings/my-settings.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 
 
 @NgModule({
     declarations: [ AppComponent ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+          }
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -28,6 +35,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
         MyAdsModule,
         MySettingsModule,
         HttpClientModule,
-    ]
+    ],
 })
 export class AppModule { }

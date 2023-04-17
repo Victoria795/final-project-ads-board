@@ -1,5 +1,5 @@
 <ng-container *ngIf="isAuthenticated; else registration">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <div>
     <p-inputMask
     [ngClass]="{'input-invalid': loginForm.controls['login'].invalid && loginForm.controls['login'].touched}"
@@ -27,13 +27,18 @@
     class="warning">Введите пароль</p>
     </div>
     <div class="btn-group">
-    <button pButton>Войти</button>
-    <button pButton (click)="isAuthenticated = false">Зарегистрироваться</button>
+    <button pButton 
+    type="submit">
+    Войти</button>
+    <button pButton 
+    type="submit"
+    (click)="isAuthenticated = false">
+    Зарегистрироваться</button>
     </div>
     </form>
 </ng-container>
 <ng-template #registration>
-    <form [formGroup]="registrationForm">
+    <form [formGroup]="registrationForm" (ngSubmit)="register()">
         <input
           type="text"
           pInputText
@@ -61,10 +66,13 @@
         <div class="btn-group">
         <button
         pButton
-        (click)="isAuthenticated = true"
+        (click)="isAuthenticated = false"
         >Войти
         </button>
-        <button pButton (click)="register()">Зарегистрироваться</button>
+        <button 
+        type="submit"
+        pButton >
+        Зарегистрироваться</button>
         </div>
       </form>
 </ng-template>

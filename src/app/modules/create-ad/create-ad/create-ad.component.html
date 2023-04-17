@@ -1,10 +1,14 @@
 <h2>Новое объявление</h2>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="createAd()">
     <div class="grid">
         <div class="col-4">
             <label class="required">Выберите категорию</label>
             <p-cascadeSelect
             class="input"
+            [options]="categories"
+            optionLabel="name"
+            optionGroupLabel="name"
+            [optionGroupChildren]="['subCategories']"
             placeholder="Нажмите, чтобы выбрать"
             formControlName="category">
             </p-cascadeSelect>
@@ -44,7 +48,11 @@
             formControlName="address"/>
         </div>
     </div>
-    <app-add-image formControlName="images" class="col-8 add-image"></app-add-image>
+    <app-add-image 
+    formControlName="images" 
+    class="col-8 add-image"
+    ngDefaultControl>
+    </app-add-image>
     <div class="grid">
         <div class="col-3">
             <label>Цена</label>
@@ -63,7 +71,7 @@
     <div>
         <button 
         pButton
-        (click)="submit()"
+        type="submit"
         >Разместить объявление</button>
         <div class="submit-warning">
             Нажимая кнопку «Разместить объявление» <br>
