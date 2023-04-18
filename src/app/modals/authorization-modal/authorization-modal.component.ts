@@ -45,6 +45,7 @@ registrationForm: FormGroup = new FormGroup({
 })
 
 logIn(){
+  this.loginForm.markAllAsTouched();
   if(this.loginForm.invalid){
     return
   }
@@ -55,6 +56,7 @@ logIn(){
 
 
 register(){
+  this.registrationForm.markAllAsTouched();
   if (this.registrationForm.invalid) {
     return;
   }

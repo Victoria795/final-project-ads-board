@@ -2,7 +2,6 @@
     <form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <div>
     <p-inputMask
-    [ngClass]="{'input-invalid': loginForm.controls['login'].invalid && loginForm.controls['login'].touched}"
     class="input" 
     type="text" 
     mask="+7(999) 999-99-99"
@@ -16,7 +15,6 @@
     </div>
     <div>
     <input 
-    [ngClass]="{'input-invalid': loginForm.controls['password'].invalid && loginForm.controls['password'].touched}"
     type="password" 
     pInputText 
     placeholder="Пароль"

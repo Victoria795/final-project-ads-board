@@ -18,7 +18,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HeaderComponent {
   
-  isAuthorised:boolean = true;
+  isAuthorised:boolean = false;
 
   items: MenuItem[] = [
     {

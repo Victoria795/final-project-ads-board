@@ -11,6 +11,9 @@ form{
 input{
     width: 100%;
 }
+:host ::ng-deep .p-inputtext{
+    width: 100%;
+}
 button{
     margin-top: 8px;
     font-size: 16px;
@@ -20,12 +23,9 @@ button{
     line-height: 20px;
     color: #EF4444;    
 }
-.input-invalid{
+.ng-invalid.ng-touched{
     border-color: #EF4444;
 }
-:host ::ng-deep .input-invalid .p-inputtext{
+:host ::ng-deep .ng-invalid.ng-touched .p-inputtext{
     border-color: #EF4444;
-}
-:host ::ng-deep .p-inputtext{
-    width: 100%;
 }
