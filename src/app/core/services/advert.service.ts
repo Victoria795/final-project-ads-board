@@ -15,6 +15,10 @@ export class AdvertService {
   getAdverts():Observable<IAd[]>{
     return this._http.get<IAd[]>(`${this.endpoint}`)
    }
+  
+  getAdvertById(id:string):Observable<IAd>{
+    return this._http.get<IAd>(`${this.endpoint}/`+ id)
+  }
 
   createAdvert(advert: IAd):Observable<any>{
     return this._http.post(`${this.endpoint}`, advert)

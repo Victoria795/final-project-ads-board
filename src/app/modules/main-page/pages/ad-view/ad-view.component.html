@@ -1,1 +1,33 @@
-<p>ad-view works!</p>
+<div class="grid">
+<ng-container *ngIf="advert; else skeleton">
+    <div class="col-8">
+        <h3 class="name">Macbook pro 13 2020 m1 8/256</h3>
+        <app-galleria></app-galleria>
+    </div>
+    <div class="col-4">
+        <div class="price">80 000</div>
+        <button pButton class="phone-btn" (click)="showUserNumber()">
+            <i class="pi pi-phone"></i>
+            <span> Показать номер телефона </span>
+        </button>
+        <div class="block">
+            <h4>Адрес</h4>
+            <p>Севастополь, ул. Гоголя, 33Б</p>
+            <a class="link">
+                Открыть на карте
+                <i class="pi pi-external-link"></i>
+              </a>      
+        </div>
+        <div class="block">
+            <h4>Описание</h4>
+            <p>Продается MacBook Pro 13 8/256 Сам ноутбук в отличном состоянии,
+                количество циклов перезарядки 123, в комплекте:
+                коробка,ноутбук,блок,кабель и чек!
+            </p>
+        </div>
+    </div>
+</ng-container>
+</div>
+<ng-template #skeleton>
+
+</ng-template>

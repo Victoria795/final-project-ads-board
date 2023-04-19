@@ -25,7 +25,10 @@ button{
 }
 .ng-invalid.ng-touched{
     border-color: #EF4444;
+    ::ng-deep{
+        .p-inputmask{
+            border-color: #EF4444;
+        }
+    }
 }
-:host ::ng-deep .ng-invalid.ng-touched .p-inputtext{
-    border-color: #EF4444;
-}
+
