@@ -4,9 +4,9 @@
     <img [src]="ad.imageUrl" class="image">
     </div>
     <h4 class="title">{{ad.name}}</h4>
-    <p class="price">{{ad.price}}</p>
+    <p class="price">{{ad.price | currency:'RUB':'symbol-narrow':'1.0-0':'ru'}}</p>
     <p class="address">{{ad.address}}</p>
-    <p class="date">{{ad.createdAt}}
+    <p class="date">{{ad.createdAt | date:'d MMMM в H:mm':'':'ru'}}
     </p>
 </div>
 </ng-container>

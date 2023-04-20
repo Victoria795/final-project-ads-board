@@ -1,19 +1,20 @@
 <h3>Рекомендации для вас</h3>
-    <div *ngIf="isLoading">
-        <div class="grid">
-            <div class="col-3" *ngFor="let item of skeleton">
-            <app-card></app-card>
-            </div>
-        </div>
-    </div>
-    
-<ng-container *ngIf="ads; else noAds">
+<ng-container *ngIf="loading$ | async as loading; else noAds">
     <div class="grid">
-    <div class="col-3" *ngFor="let ad of ads">
+    <div class="col-3" *ngFor="let ad of loading.ads">
       <div>
        <app-card [ad]="ad"></app-card>
       </div>
     </div>
     </div>
-</ng-container>
+</ng-container>   
+<div *ngIf="loading$ | async as loading; else noAds">
+    <ng-container *ngIf="loading.isLoading">
+        <div class="grid">
+            <div class="col-3" *ngFor="let item of skeleton">
+            <app-card></app-card>
+            </div>
+        </div>
+    </ng-container>
+</div>
 <ng-template #noAds><p>У вас пока нет рекомендованных объявлений</p></ng-template>

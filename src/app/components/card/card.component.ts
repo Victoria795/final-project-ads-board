@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { IAd } from 'src/app/interfaces/i-ad';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DatePipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-card',
@@ -16,7 +18,7 @@ export class CardComponent {
 @NgModule({
   declarations: [CardComponent],
   exports: [CardComponent],
-  imports: [RouterLink, NgIf, SkeletonModule ],
+  imports: [RouterLink, NgIf, SkeletonModule, DatePipe, CurrencyPipe ],
 })
 export class CardComponentModule {}
 

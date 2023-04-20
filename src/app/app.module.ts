@@ -11,11 +11,10 @@ import { MyAdsModule } from './modules/my-ads/my-ads.module';
 import { MySettingsModule } from './modules/my-settings/my-settings.module';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
 
-
-
-
-
+registerLocaleData(localeRu);
 
 @NgModule({
     declarations: [ AppComponent],
