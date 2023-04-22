@@ -9,7 +9,6 @@ import { ICategory } from 'src/app/interfaces/i-category';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit{
-  @Input() public isFilterOpened: boolean = false;
 
   categories:ICategory[] = [];
   selectedCategory:any

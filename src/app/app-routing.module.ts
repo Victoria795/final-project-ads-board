@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
+    title: 'Рекомендации',
     loadChildren: () =>
       import('./modules/main-page/main-page.module').then(
         (m) => m.MainPageModule
@@ -12,6 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'create-ad',
+    title: 'Новое объявление',
+    canMatch: [() => inject(AuthService).isLoggined()],
     loadChildren: () =>
       import('./modules/create-ad/create-ad.module').then(
         (m) => m.CreateAdModule
@@ -19,6 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'my-ads',
+    title: 'Мои объявления',
+    canMatch: [() => inject(AuthService).isLoggined()],
     loadChildren: () =>
       import('./modules/my-ads/my-ads.module').then(
         (m) => m.MyAdsModule
@@ -26,12 +32,17 @@ const routes: Routes = [
   },
   {
     path: 'my-settings',
+    title: 'Настройки',
+    canMatch: [() => inject(AuthService).isLoggined()],
     loadChildren: () =>
       import('./modules/my-settings/my-settings.module').then(
         (m) => m.MySettingsModule
       )
-  }
-
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  },
 ];
 
 @NgModule({

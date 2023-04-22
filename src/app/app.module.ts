@@ -13,11 +13,12 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 registerLocaleData(localeRu);
 
 @NgModule({
-    declarations: [ AppComponent],
+    declarations: [ AppComponent, NotFoundComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

@@ -52,4 +52,7 @@ export class AuthService {
     console.log(msg)
     return throwError(msg);
   }
+  public isLoggined(){
+    return true;
+  }
 }

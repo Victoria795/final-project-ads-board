@@ -20,7 +20,15 @@ export class AdvertService {
     return this._http.get<IAd>(`${this.endpoint}/`+ id)
   }
 
-  createAdvert(advert: IAd):Observable<any>{
-    return this._http.post(`${this.endpoint}`, advert)
+  createAdvert(advert: any){
+    const body = {
+      name: advert.name,
+      description: advert.description,
+      categoryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      imageUrl: advert.images,
+      price: advert.price,
+      address: advert.address
+    }
+    return this._http.post(`${this.endpoint}`, body)
   }
 }
