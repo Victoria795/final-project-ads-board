@@ -30,6 +30,6 @@ export class AdvertService {
       price: advert.price,
       address: advert.address
     }
-    return this._http.post(`${this.endpoint}`, body)
+    return this._http.post<any>(`${this.endpoint}`, body).subscribe();
   }
 }

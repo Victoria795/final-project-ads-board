@@ -1,0 +1,40 @@
+<ng-container *ngIf="images; else skeleton">
+    <div class="main-image">
+      <img [src]="images[selectedImage].src" />
+    </div>
+    <div class="grid">
+      <div class="col-2" *ngFor="let image of images; let i = index">
+        <div
+          class="image__container"
+          [ngClass]="selectedImage === i ? 'image__container_selected' : ''">
+          <img [src]="image.src" (click)="selectedImage = i" />
+        </div>
+      </div>
+    </div>
+</ng-container>
+<ng-template #skeleton>
+    <div class="main-image">
+        <p-skeleton width="100%" height="512px"></p-skeleton>
+    </div>
+    <div class="grid">
+    <div class="col-2">
+      <p-skeleton width="100%" height="84px"></p-skeleton>
+    </div>
+    <div class="col-2">
+      <p-skeleton width="100%" height="84px"></p-skeleton>
+    </div>
+    <div class="col-2">
+      <p-skeleton width="100%" height="84px"></p-skeleton>
+    </div>
+    <div class="col-2">
+      <p-skeleton width="100%" height="84px"></p-skeleton>
+    </div>
+    <div class="col-2">
+      <p-skeleton width="100%" height="84px"></p-skeleton>
+    </div>
+    <div class="col-2">
+      <p-skeleton width="100%" height="84px"></p-skeleton>
+    </div>
+    </div>
+</ng-template>
+  

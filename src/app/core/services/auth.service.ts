@@ -13,7 +13,7 @@ export class AuthService {
   currentUser = {};
   constructor(private _http: HttpClient, public router: Router) {}
   // Регистрация
-  register(user: IUser): Observable<any> {
+  register(user: IUser) {
     const body = {
       login: user.login,
       password: user.password,

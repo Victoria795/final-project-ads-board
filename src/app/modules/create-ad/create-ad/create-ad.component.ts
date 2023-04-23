@@ -57,12 +57,12 @@ export class CreateAdComponent {
     ]
 
   createAd() {
-    if (this.form.invalid) {
+  if (this.form.invalid) {
       return;
-    }
+  }
   const advert = this.form.value;
   this._advertService.createAdvert(advert);
-  console.log('SUBMIT', this.form.value);
+  console.log('SUBMIT', advert);
   this.form.reset();
     
   }

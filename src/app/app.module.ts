@@ -5,15 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageModule } from './modules/main-page/main-page.module';
 import { CreateAdModule } from './modules/create-ad/create-ad.module';
-import { HeaderComponentModule } from './components/header/header.component';
-import { SearchPanelComponentModule } from './components/search-panel/search-panel.component';
+import { HeaderComponentModule } from './shared/components/header/header.component';
+import { SearchPanelComponentModule } from './shared/components/search-panel/search-panel.component';
 import { MyAdsModule } from './modules/my-ads/my-ads.module';
 import { MySettingsModule } from './modules/my-settings/my-settings.module';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+
 
 registerLocaleData(localeRu);
 

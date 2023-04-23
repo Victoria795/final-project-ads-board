@@ -1,8 +1,9 @@
 <div class="grid">
 <ng-container *ngIf="advert$ | async as advert; else skeleton">
+    <div class="breadcrumbs col-12">Хлебные крошки</div>
     <div class="col-8">
         <h3 class="name">{{advert.name}}</h3>
-        <app-galleria></app-galleria>
+        <app-galleria [images]="images"></app-galleria>
     </div>
     <div class="col-4">
         <div class="price">{{advert.price | currency:'RUB':'symbol-narrow':'1.0-0':'ru'}}</div>
@@ -26,9 +27,12 @@
 </ng-container>
 
 <ng-template #skeleton>
+    <div class="breadcrumbs col-12">
+        <p-skeleton width="20%" height="20px"></p-skeleton>
+    </div>
     <div class="col-8">
         <div class="name">
-        <p-skeleton width="50%" height="36px"></p-skeleton>
+        <p-skeleton width="60%" height="36px"></p-skeleton>
         </div>
         <app-galleria></app-galleria>
     </div>
@@ -39,7 +43,7 @@
         <p-skeleton 
         class="phone-btn"
         width="100%" 
-        height="68px"></p-skeleton>       
+        height="58px"></p-skeleton>       
         <div class="block">
             <h4>Адрес</h4>
             <p-skeleton

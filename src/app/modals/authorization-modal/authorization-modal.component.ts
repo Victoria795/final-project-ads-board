@@ -61,7 +61,7 @@ register(){
     return;
   }
   const user = this.registrationForm.value;
-  this._authService.register(user);
+  this._authService.register(user).subscribe();
   this._dynamicDialogue.close();
 }
 }

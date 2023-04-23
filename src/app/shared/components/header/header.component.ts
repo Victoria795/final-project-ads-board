@@ -1,4 +1,4 @@
-import { AuthorizationModalComponent } from './../../modals/authorization-modal/authorization-modal.component';
+import { AuthorizationModalComponent } from 'src/app/modals/authorization-modal/authorization-modal.component';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';

@@ -36,14 +36,10 @@ showUserNumber(){
 
 public ngOnInit() {
 
-
-
-  setTimeout(() => {
     this.id = this._activatedRoute.snapshot.params['id'];
     this.advert$ = this._advertService.getAdvertById(this.id);
 
-    this.images = {
-      images: [
+    this.images = [
         {
           src: 'https://i.pinimg.com/originals/42/67/3e/42673e608003f60330c9cb36c1f7ff90.jpg',
         },
@@ -59,8 +55,6 @@ public ngOnInit() {
         {
           src: 'https://proprikol.ru/wp-content/uploads/2021/10/krasivye-foto-26.jpg',
         },
-      ],
-    };
-  }, 1000);
+      ]
 }
 }

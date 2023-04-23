@@ -1,4 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, Input, NgModule } from '@angular/core';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-galleria',
@@ -6,12 +8,13 @@ import { Component, NgModule } from '@angular/core';
   styleUrls: ['./galleria.component.scss']
 })
 export class GalleriaComponent {
-
+  @Input() public images: any;
+  public selectedImage: number = 0;
 }
 @NgModule({
   declarations: [GalleriaComponent],
   exports: [GalleriaComponent],
-  imports: [],
+  imports: [ NgIf, NgFor, NgClass, SkeletonModule],
 })
 export class GalleriaComponentModule {}
 
