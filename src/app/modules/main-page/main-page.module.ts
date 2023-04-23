@@ -10,13 +10,13 @@ import { AdViewComponent } from './pages/ad-view/ad-view.component';
 import { NgIf } from '@angular/common';
 import { UserNumberModalComponentModule } from 'src/app/modals/user-number-modal/user-number-modal.component';
 import { GalleriaComponentModule } from 'src/app/components/galleria/galleria.component';
-
+import { CurrencyPipe } from '@angular/common';
 
 
 @NgModule({
   declarations: [
     RecommendationsComponent,
-    AdViewComponent,
+    AdViewComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,8 @@ import { GalleriaComponentModule } from 'src/app/components/galleria/galleria.co
     SkeletonModule,
     NgIf,
     UserNumberModalComponentModule,
-    GalleriaComponentModule
-  ]
+    GalleriaComponentModule,
+  ],
+  providers: [ CurrencyPipe ]
 })
 export class MainPageModule { }

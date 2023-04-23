@@ -12,11 +12,11 @@ export class CreateAdComponent {
   constructor(private _advertService: AdvertService){}
 
   form: FormGroup = new FormGroup({
-    category: new FormControl<string>('',[Validators.required]),
+    category: new FormControl<string | null>('',[Validators.required]),
     name: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl<string>(''),
     address: new FormControl<string>('', [Validators.required]),
-    images: new FormControl<string>(''),
+    images: new FormControl<[[]] | null>(null),
     price: new FormControl<number>(0),
   })
   categories = [

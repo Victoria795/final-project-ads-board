@@ -29,7 +29,12 @@
       font-size: 24px;
       line-height: 32px;
     }
-    a{
+    .link{
       color: #3B82F6;
+      cursor: pointer;
     }
+}
+.skeleton-item{
+  display: block;
+  margin-top: 10px;
 }

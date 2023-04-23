@@ -2,6 +2,7 @@
     class="file-input"
     type="file" 
     accept=".png, .jpg, .jpeg"
+    [multiple]="true"
     (change)="uploadImage($event)" #fileUpload>
 <div class="container">
 <p-button 

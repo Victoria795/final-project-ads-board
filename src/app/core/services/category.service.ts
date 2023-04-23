@@ -7,11 +7,11 @@ import { ICategory } from 'src/app/interfaces/i-category';
   providedIn: 'root'
 })
 export class CategoryService {
-  /* constructor(private _http: HttpClient) {}
+  // constructor(private _http: HttpClient) {}
   
-  getCategories():Observable<any>{
-    return this._http.get<any>('/api/Category')
-   } */
+  // getCategories():Observable<any>{
+  //   return this._http.get<any>('/api/Category').pipe(map(res => this.transformCategories(res)))
+  //  } 
    private mock = [
     {
       id: 'f92fed76-9dba-41d8-b3a2-03ae09826484',
@@ -57,7 +57,7 @@ export class CategoryService {
     },
     {
       id: 'd60257e3-a914-4c74-8ea6-d297d1eee92b',
-      parentId: '00000000-0000-0000-0000-000000000000',
+      parentId: null,
       name: 'Транспорт',
       isActive: true,
       createdAt: '2023-04-07T15:52:30.262636Z',
@@ -106,20 +106,19 @@ export class CategoryService {
     },
     {
       id: 'd60257e3-a914-4c74-8ea6-d297d1eesdf',
-      parentId: '00000000-0000-0000-0000-000000000000',
+      parentId: null,
       name: 'Электроника',
       isActive: true,
       createdAt: '2023-04-07T15:52:30.262636Z',
     },
   ];
-  public getCategories():Observable<ICategory[]> {
+  public getCategories():Observable<any> {
     return of(this.mock).pipe(map(res => this.transformCategories(res)))
    } 
   private transformCategories(array: any[]): any {
-    const rootCategories = array.filter((category) => category.parentId === '00000000-0000-0000-0000-000000000000'
+    const rootCategories = array.filter((category) => category.parentId === null
     );
-    const transformed = this.findSubCategories(rootCategories, array);
-    return transformed;
+    return this.findSubCategories(rootCategories, array);
    }
   private findSubCategories(currLevel: any[], array: any[]):any {
     const transformedArray = [];
@@ -127,10 +126,8 @@ export class CategoryService {
       const child = array.filter((category) => category.parentId === item.id);
       item.child = this.findSubCategories(child, array);
       transformedArray.push(item);
-      if (child.length === 0){
-        return null
-      }
     }
-    return transformedArray;
+    return!
+    transformedArray.length ? null : transformedArray;
    }
 }

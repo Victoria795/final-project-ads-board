@@ -6,22 +6,21 @@ import { ICategory } from 'src/app/interfaces/i-category';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit{
 
-  categories:ICategory[] = [];
+  categories:any;
   selectedCategory:any
   
-  constructor(private readonly Categoryservice: CategoryService){
+  constructor(private readonly _categoryService: CategoryService){
   }
   
   ngOnInit():void {
-    this.Categoryservice.getCategories()
+    this._categoryService.getCategories()
     .subscribe((response) => {
-      this.categories = response;
-    }
-    )
+    this.categories = response;
+    })
   }
   selectCategory(category: any){
     this.selectedCategory = category

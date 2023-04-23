@@ -1,18 +1,18 @@
 <div class="grid">
-<ng-container *ngIf="advert; else skeleton">
+<ng-container *ngIf="advert$ | async as advert; else skeleton">
     <div class="col-8">
-        <h3 class="name">Macbook pro 13 2020 m1 8/256</h3>
+        <h3 class="name">{{advert.name}}</h3>
         <app-galleria></app-galleria>
     </div>
     <div class="col-4">
-        <div class="price">80 000</div>
+        <div class="price">{{advert.price | currency:'RUB':'symbol-narrow':'1.0-0':'ru'}}</div>
         <button pButton class="phone-btn" (click)="showUserNumber()">
             <i class="pi pi-phone"></i>
             <span> Показать номер телефона </span>
         </button>
         <div class="block">
             <h4>Адрес</h4>
-            <p>Севастополь, ул. Гоголя, 33Б</p>
+            <p>{{advert.address}}</p>
             <a class="link">
                 Открыть на карте
                 <i class="pi pi-external-link"></i>
@@ -20,14 +20,47 @@
         </div>
         <div class="block">
             <h4>Описание</h4>
-            <p>Продается MacBook Pro 13 8/256 Сам ноутбук в отличном состоянии,
-                количество циклов перезарядки 123, в комплекте:
-                коробка,ноутбук,блок,кабель и чек!
-            </p>
+            <p>{{advert.description}}</p>
         </div>
     </div>
 </ng-container>
-</div>
-<ng-template #skeleton>
 
+<ng-template #skeleton>
+    <div class="col-8">
+        <div class="name">
+        <p-skeleton width="50%" height="36px"></p-skeleton>
+        </div>
+        <app-galleria></app-galleria>
+    </div>
+    <div class="col-4">
+        <div class="price">
+            <p-skeleton width="30%" height="36px"></p-skeleton>
+        </div>
+        <p-skeleton 
+        class="phone-btn"
+        width="100%" 
+        height="68px"></p-skeleton>       
+        <div class="block">
+            <h4>Адрес</h4>
+            <p-skeleton
+            class="skeleton-item"
+            width="70%"
+            height="25px"
+            ></p-skeleton>
+            <p-skeleton 
+            class="skeleton-item"
+            width="40%"
+            height="25px"
+            ></p-skeleton>
+        </div>
+        <div class="block">
+            <h4>Описание</h4>
+            <p-skeleton
+            class="skeleton-item"
+            width="90%"
+            height="70px"
+          ></p-skeleton>  
+        </div>
+    </div>   
 </ng-template>
+</div>

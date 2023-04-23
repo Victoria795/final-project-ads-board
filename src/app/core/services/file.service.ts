@@ -11,11 +11,10 @@ export class FileService {
 
   endpoint: string = '/api/File';
   
-  upload(file: File): Observable<string> {
+  upload(files: File[]): Observable<string> {
+    const formData = new FormData();
+    files.forEach(file => formData.append('files[]', file, file.name));
 
-         const formData = new FormData();
-         formData.append('file', file, file.name);
-
-         return this._http.post<string>(`${this.endpoint}`, formData);
-   }
+    return this._http.post<string>('', formData);
+}
 }

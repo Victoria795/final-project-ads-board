@@ -14,8 +14,13 @@ export class AuthService {
   constructor(private _http: HttpClient, public router: Router) {}
   // Регистрация
   register(user: IUser): Observable<any> {
+    const body = {
+      login: user.login,
+      password: user.password,
+      email: user.name
+    }
     return this._http
-    .post(`${this.endpoint}/register`, user)
+    .post(`${this.endpoint}/register`, body)
     .pipe(catchError(this.handleError));
   }
   // Вход
