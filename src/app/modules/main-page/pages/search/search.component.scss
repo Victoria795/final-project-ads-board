@@ -1,0 +1,83 @@
+h3{
+    margin:24px 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: #1E293B; 
+}
+.side-bar{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #1E293B;
+    h4{
+      font-size: 18px;
+    }
+    h5{
+      font-size: 16px;
+      margin-top: 8px;
+    }
+    .categories__container{
+      display: flex;
+      flex-direction: column;
+      margin-top: 4px;
+      gap: 8px;
+      .category{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #3B82F6;
+        cursor: pointer;
+      }
+    }
+    .inputs__container{
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        input{
+            width: 149px;
+            height: 40px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+    button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 16px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .title{
+        color: #64748B;
+    }
+   .sort-block{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        .sort{
+            color: #1E293B;
+        }
+        ::ng-deep .p-dropdown{
+            width: 200px;
+            height: 40px;
+        }
+    }
+}

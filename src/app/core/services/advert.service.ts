@@ -25,8 +25,8 @@ export class AdvertService {
     const body = {
       name: advert.name,
       description: advert.description,
-      categoryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      imageUrl: advert.images,
+      categoryId: 'ff1737cc-67a1-4c2c-b9f4-9603465c1633',
+      imageUrl: 'https://sportishka.com/uploads/posts/2021-12/1639134195_33-sportishka-com-p-mashini-raznikh-marok-sport-krasivo-foto-34.jpg',
       price: advert.price,
       address: advert.address
     }

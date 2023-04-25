@@ -1,0 +1,43 @@
+<h3>Объявления по запросу «попугаи»</h3>
+<ng-container *ngIf="loading$ | async as loading">
+  <div class="grid">
+      <div class="col-3">
+        <div class="side-bar">
+          <h4>Все категории</h4>
+          <div class="categories__container">
+            <span class="category">Категория</span>
+            <span class="category">Категория</span>
+            <span class="category">Категория</span>
+            <span class="category">Категория</span>
+            <span class="category">Категория</span>
+            <span class="category">Категория</span>
+          </div>
+          <h5>Цена</h5>
+          <div class="inputs__container">
+            <input pInputText pKeyFilter="money" placeholder="Цена от"/>
+            <input pInputText pKeyFilter="money" placeholder="до, руб."/>
+          </div>
+          <button pButton>Показать объявления</button>
+        </div>
+      </div>
+      <div class="col-9">
+          <div class="grid">
+              <div class="col-12">
+                  <div class="header">
+                      <span class="title">Всего найдено 1 234 объявления</span>
+                      <div class="sort-block">
+                        <span class="sort">Сортировка по</span>
+                        <p-dropdown [options]="cities" optionLabel="name"></p-dropdown>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-4" *ngFor="let ad of loading.ads">
+                <div>
+                    <app-card [ad]="ad"></app-card>
+                </div>
+              </div>
+          </div>
+       </div>
+    </div>
+</ng-container>
+ 
