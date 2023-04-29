@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { AuthorizationModalComponent } from 'src/app/modals/authorization-modal/authorization-modal.component';
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
@@ -8,6 +9,8 @@ import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AuthorizationModalComponentModule } from 'src/app/modals/authorization-modal/authorization-modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -15,15 +18,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  isAuthorised:boolean = false;
-
-  ngOnInit(): void {
-    this.isAuthorised = this._authService.isLoggined;
-
-  }
+  isLoggined$ = this._authService.isLoggined$;
   
+  constructor(
+    private _dialogService: DialogService,
+    private _authService: AuthService,
+    private _confirmationService: ConfirmationService,
+  ) {}
+
   items: MenuItem[] = [
     {
       label: 'Мои объявления',
@@ -35,14 +39,22 @@ export class HeaderComponent implements OnInit {
     },
     {
       label: 'Выйти',
-      command: () => this._authService.logOut()
+      command: () => this.confirmLogOut()
     }
   ]
-  constructor(
-    private _dialogService: DialogService,
-    private _authService: AuthService
-  ) {}
-  
+
+  confirmLogOut() {
+    this._confirmationService.confirm({
+        message: 'Вы уверены, что хотите выйти?',
+        header: 'Подтверждение',
+        accept: () => {
+            this._authService.logOut()
+        },
+        reject: () => {
+          return
+        }
+    });
+} 
   showAuthorizationDialog(){
     this._dialogService.open(AuthorizationModalComponent,{
     header: 'Авторизация',
@@ -57,10 +69,12 @@ export class HeaderComponent implements OnInit {
     MenuModule,
     NgIf,
     DialogModule,
-    AuthorizationModalComponentModule
+    AuthorizationModalComponentModule,
+    CommonModule,
+    ConfirmDialogModule
   ],
   exports: [HeaderComponent],
-  providers: [ DialogService ],
+  providers: [ DialogService, ConfirmationService ],
 })
 
 export class HeaderComponentModule {}

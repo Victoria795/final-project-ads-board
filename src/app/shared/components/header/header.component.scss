@@ -26,3 +26,6 @@ button{
   font-size: 12px;
   margin-top: 3px;
   }
+::ng-deep .menucus ul li:nth-child(3) .p-menuitem-text{
+  color: red;
+  }
