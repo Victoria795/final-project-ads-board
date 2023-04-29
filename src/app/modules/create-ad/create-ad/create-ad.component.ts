@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdvertService } from 'src/app/core/services/advert.service';
 
@@ -9,15 +9,15 @@ import { AdvertService } from 'src/app/core/services/advert.service';
 })
 export class CreateAdComponent {
 
-  constructor(private _advertService: AdvertService){}
+  constructor(private _advertService: AdvertService) {}
 
-  form: FormGroup = new FormGroup({
-    category: new FormControl<string | null>('',[Validators.required]),
-    name: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
-    description: new FormControl<string>(''),
-    address: new FormControl<string>('', [Validators.required]),
+  form:FormGroup = new FormGroup({
+    category: new FormControl<string>('',[Validators.required]),
+    name: new FormControl<string>('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
+    description: new FormControl<string | null>(null, [Validators.minLength(10), Validators.maxLength(100)]),
+    address: new FormControl<string>('', [Validators.required, Validators.minLength(3), Validators.maxLength(250)]),
     images: new FormControl<[[]] | null>(null),
-    price: new FormControl<number>(0),
+    price: new FormControl<number | null>(null),
   })
   categories = [
     {
@@ -57,6 +57,7 @@ export class CreateAdComponent {
     ]
 
   createAd() {
+  this.form.markAllAsTouched();
   if (this.form.invalid) {
       return;
   }
@@ -64,6 +65,5 @@ export class CreateAdComponent {
   this._advertService.createAdvert(advert);
   console.log('SUBMIT', advert);
   this.form.reset();
-    
   }
 }
