@@ -16,6 +16,7 @@ input{
 }
 button{
     margin-top: 8px;
+    font-weight: 600;
     font-size: 16px;
 }
 .warning{
@@ -25,10 +26,8 @@ button{
 }
 .ng-invalid.ng-touched{
     border-color: #EF4444;
-    ::ng-deep{
-        .p-inputmask{
-            border-color: #EF4444;
-        }
-    }
+}
+::ng-deep .input-invalid .p-inputmask{
+    border-color: #EF4444;
 }
 

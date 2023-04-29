@@ -43,3 +43,13 @@ button{
     padding: 0;
     margin: 8px 0;
 }
+
+.warning{
+    font-size: 14px;
+    line-height: 20px;
+    color: #EF4444;
+    margin-bottom: 8px;    
+}
+.ng-invalid.ng-touched{
+    border-color: #EF4444;
+}

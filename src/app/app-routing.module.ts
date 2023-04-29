@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'create-ad',
     title: 'Новое объявление',
-    canMatch: [() => inject(AuthService).isLoggined()],
+    canMatch: [() => inject(AuthService).isLoggined],
     loadChildren: () =>
       import('./modules/create-ad/create-ad.module').then(
         (m) => m.CreateAdModule
@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'my-ads',
     title: 'Мои объявления',
-    canMatch: [() => inject(AuthService).isLoggined()],
+    canMatch: [() => inject(AuthService).isLoggined],
     loadChildren: () =>
       import('./modules/my-ads/my-ads.module').then(
         (m) => m.MyAdsModule
@@ -33,7 +33,7 @@ const routes: Routes = [
   {
     path: 'my-settings',
     title: 'Настройки',
-    canMatch: [() => inject(AuthService).isLoggined()],
+    canMatch: [() => inject(AuthService).isLoggined],
     loadChildren: () =>
       import('./modules/my-settings/my-settings.module').then(
         (m) => m.MySettingsModule

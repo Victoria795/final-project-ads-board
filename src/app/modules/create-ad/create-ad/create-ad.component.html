@@ -23,6 +23,12 @@
             pInputText 
             placeholder="Что хотите продать?"
             formControlName="name"/>
+            <div *ngIf="form.controls['name'].errors?.['minlength']" class="warning">
+                Имя должно содержать не менее 3 символов
+            </div>
+            <div *ngIf="form.controls['name'].errors?.['maxlength']" class="warning">
+                Имя должно содержать не более 32 символов
+            </div>
         </div>
     </div>
     <div class="grid">
@@ -35,6 +41,12 @@
             pInputTextarea
             placeholder="Расскажите подробнее о товаре или услуге"
             formControlName="description"></textarea>
+            <div *ngIf="form.controls['description'].errors?.['minlength']" class="warning">
+                Описание должно содержать не менее 10 символов
+            </div>
+            <div *ngIf="form.controls['description'].errors?.['maxlength']" class="warning">
+                Описание должно содержать не более 100 символов
+            </div>
         </div>
     </div>
     <div class="grid">
@@ -46,6 +58,12 @@
             pInputText 
             placeholder="Начните вводить адрес"
             formControlName="address"/>
+            <div *ngIf="form.controls['address'].errors?.['minlength']" class="warning">
+                Адрес должен содержать не менее 3 символов
+            </div>
+            <div *ngIf="form.controls['address'].errors?.['maxlength']" class="warning">
+                Адрес должен содержать не более 250 символов
+            </div>
         </div>
     </div>
     <app-add-image 

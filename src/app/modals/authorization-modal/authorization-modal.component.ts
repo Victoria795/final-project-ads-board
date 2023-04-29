@@ -40,8 +40,7 @@ constructor(
 registrationForm: FormGroup = new FormGroup({
   login: new FormControl<string>('',[Validators.required]),
   name: new FormControl<string>('',[Validators.required]),
-  password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
-  confirmPassword: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
+  password: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
 })
 
 logIn(){

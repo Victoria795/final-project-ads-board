@@ -7,6 +7,7 @@
     mask="+7(999) 999-99-99"
     placeholder="Номер телефона"
     formControlName="login"
+    [ngClass]="{'input-invalid': loginForm.controls['login'].invalid && loginForm.controls['login'].touched}"
     >
     </p-inputMask>
     <p 
@@ -21,15 +22,16 @@
     formControlName="password"
     />
     <p 
-    *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" 
+    *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" 
     class="warning">Введите пароль</p>
     </div>
     <div class="btn-group">
     <button pButton 
     type="submit">
     Войти</button>
-    <button pButton 
-    type="submit"
+    <button pButton
+    class="p-button-text"
+    type="button"
     (click)="isAuthenticated = false">
     Зарегистрироваться</button>
     </div>
@@ -37,40 +39,59 @@
 </ng-container>
 <ng-template #registration>
     <form [formGroup]="registrationForm" (ngSubmit)="register()">
-        <input
-          type="text"
-          pInputText
-          placeholder="Номер телефона"
-          formControlName="login"
-        />
+        <div>
+        <p-inputMask
+        class="input" 
+        type="text" 
+        mask="+7(999) 999-99-99"
+        placeholder="Номер телефона"
+        formControlName="login"
+        [ngClass]="{'input-invalid': registrationForm.controls['login'].invalid && registrationForm.controls['login'].touched}"
+        >
+        </p-inputMask>
+        <p 
+        *ngIf="registrationForm.controls['login'].invalid && registrationForm.controls['login'].touched" 
+        class="warning">Введите номер телефона</p>
+        </div>
+        <div>
         <input
         type="text"
         pInputText
         placeholder="Имя"
         formControlName="name"
         />
+        <p 
+        *ngIf="registrationForm.controls['name'].invalid && registrationForm.controls['name'].touched" 
+        class="warning">Введите ваше имя</p>
+        </div>
+        <div>
         <input
           type="password"
           pInputText
           placeholder="Пароль"
           formControlName="password"
         />
-        <input
-          type="password"
-          pInputText
-          placeholder="Подтвердите пароль"
-          formControlName="confirmPassword"
-        />
+        <p 
+        *ngIf="registrationForm.controls['password'].errors?.['required'] && registrationForm.controls['password'].touched" 
+        class="warning">Введите пароль</p>
+        <p *ngIf="registrationForm.controls['password'].errors?.['minlength']" class="warning">
+          Пароль должен содержать не менее 8 символов
+        </p>
+        <p *ngIf="registrationForm.controls['password'].errors?.['maxlength']" class="warning">
+          Пароль должен содержать не более 32 символов
+        </p>
+        </div>
         <div class="btn-group">
-        <button
-        pButton
-        (click)="isAuthenticated = false"
-        >Войти
-        </button>
-        <button 
-        type="submit"
-        pButton >
-        Зарегистрироваться</button>
+          <button 
+          type="submit"
+          pButton >
+          Зарегистрироваться</button>
+          <button
+          pButton
+          class="p-button-text"
+          (click)="isAuthenticated = false"
+          >Войти
+          </button>
         </div>
       </form>
 </ng-template>

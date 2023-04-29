@@ -28,13 +28,13 @@ export class AuthService {
     return this._http
       .post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
+        localStorage.setItem('access_token', res);
       });
   }
   getToken() {
     return localStorage.getItem('access_token');
   }
-  get isLoggedIn(): boolean {
+  get isLoggined():boolean {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
   }
@@ -57,7 +57,7 @@ export class AuthService {
     console.log(msg)
     return throwError(msg);
   }
-  public isLoggined(){
-    return true;
-  }
+  // public isLoggined(){
+  //   return false;
+  // }
 }

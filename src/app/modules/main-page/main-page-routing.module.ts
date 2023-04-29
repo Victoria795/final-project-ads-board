@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'search/ad-view/:id',
+    component: AdViewComponent
   }
 
 ];

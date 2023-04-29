@@ -1,5 +1,5 @@
 import { AuthorizationModalComponent } from 'src/app/modals/authorization-modal/authorization-modal.component';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
@@ -14,12 +14,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
-  
-  isAuthorised = this._authService.isLoggined();
+export class HeaderComponent implements OnInit {
 
+  isAuthorised:boolean = false;
+
+  ngOnInit(): void {
+    this.isAuthorised = this._authService.isLoggined;
+
+  }
+  
   items: MenuItem[] = [
     {
       label: 'Мои объявления',
