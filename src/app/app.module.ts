@@ -14,8 +14,12 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { AngularYandexMapsModule, YaConfig } from "angular8-yandex-maps";
 
-
+const mapConfig: YaConfig = {
+    apikey: '717ccef5-a34f-42fa-882d-fc2791edda51',
+    lang: 'ru_RU',
+  };
 
 registerLocaleData(localeRu);
 
@@ -40,6 +44,7 @@ registerLocaleData(localeRu);
         MyAdsModule,
         MySettingsModule,
         HttpClientModule,
+        AngularYandexMapsModule.forRoot(mapConfig)
     ],
 })
 export class AppModule { }

@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdvertService } from 'src/app/core/services/advert.service';
+import { YaApiLoaderService } from 'angular8-yandex-maps';
+
 
 @Component({
   selector: 'app-create-ad',
   templateUrl: './create-ad.component.html',
   styleUrls: ['./create-ad.component.scss']
 })
-export class CreateAdComponent {
+export class CreateAdComponent implements OnInit{
 
-  constructor(private _advertService: AdvertService) {}
+  constructor(private _advertService: AdvertService,
+              private _yaApiLoaderService: YaApiLoaderService) {}
+  
+  ngOnInit(): void {
+    this._yaApiLoaderService.load().subscribe((ymaps) => {
+      new ymaps.SuggestView('address');
+    });
+  }
 
   form:FormGroup = new FormGroup({
     category: new FormControl<string>('',[Validators.required]),
@@ -19,6 +28,7 @@ export class CreateAdComponent {
     images: new FormControl<[[]] | null>(null),
     price: new FormControl<number | null>(null),
   })
+
   categories = [
     {
       id:'auto',

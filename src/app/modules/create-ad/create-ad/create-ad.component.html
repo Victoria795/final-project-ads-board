@@ -57,6 +57,7 @@
             type="text" 
             pInputText 
             placeholder="Начните вводить адрес"
+            id="address"
             formControlName="address"/>
             <div *ngIf="form.controls['address'].errors?.['minlength']" class="warning">
                 Адрес должен содержать не менее 3 символов
