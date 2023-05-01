@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserNumberModalComponent } from 'src/app/modals/user-number-modal/user-number-modal.component';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { ActivatedRoute } from '@angular/router';
 import { IFullAd } from 'src/app/interfaces/i-full-ad';
@@ -14,7 +14,6 @@ import { IFullAd } from 'src/app/interfaces/i-full-ad';
   styleUrls: ['./ad-view.component.scss'],
 })
 export class AdViewComponent implements OnInit{
-
 public advert$: Observable<IFullAd> | undefined;
 public id: string = '';
 public images: any = false;
@@ -32,6 +31,11 @@ showUserNumber(){
       width: '516px',
     },
   });
+}
+
+openMap(address:string){
+  const url = `https://yandex.com/maps/?text=${encodeURIComponent(address)}`;
+  window.open(url, '_blank');
 }
 
 public ngOnInit() {

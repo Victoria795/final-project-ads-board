@@ -1,62 +1,80 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import { FileService } from 'src/app/core/services/file.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-add-image',
   templateUrl: './add-image.component.html',
-  styleUrls: ['./add-image.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: AddImageComponent,
-    },
-    MessageService,
-  ],
-
+  styleUrls: ['./add-image.component.scss']
 })
-export class AddImageComponent implements ControlValueAccessor{
 
-  public value:any[] = [];
+export class AddImageComponent {
+  uploadedFiles: any[] = [];
+  
+  onUpload(event: { files: any; }) {
+    for(let file of event.files) {
+        this.uploadedFiles.push(file);
+    }
+}
+}
 
-  constructor(private _fileService: FileService){}
+// import { Component, EventEmitter, Output } from '@angular/core';
+// import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+// import { MessageService } from 'primeng/api';
+// import { FileService } from 'src/app/core/services/file.service';
 
-  onChange: (value: boolean) => void = () => { };
+// @Component({
+//   selector: 'app-add-image',
+//   templateUrl: './add-image.component.html',
+//   styleUrls: ['./add-image.component.scss'],
+//   providers: [
+//     {
+//       provide: NG_VALUE_ACCESSOR,
+//       multi: true,
+//       useExisting: AddImageComponent,
+//     },
+//     MessageService,
+//   ],
 
-  onTouched: () => void = () => { };
+// })
+// export class AddImageComponent implements ControlValueAccessor{
 
-  public writeValue(obj: any): void {
-    this.value = obj;
-  }
+//   public value:any[] = [];
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
+//   constructor(private _fileService: FileService){}
 
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
+//   onChange: (value: boolean) => void = () => { };
 
-  uploadImage(event:any){
+//   onTouched: () => void = () => { };
 
-    const files: File[] = Array.from((event.target as HTMLInputElement).files as FileList);
+//   public writeValue(obj: any): void {
+//     this.value = obj;
+//   }
 
-    this._fileService.upload(files)
-    .subscribe({
-      next:  (file) => {
-        this.value.push(file);
+//   registerOnChange(fn: any): void {
+//     this.onChange = fn;
+//   }
+
+//   registerOnTouched(fn: any): void {
+//     this.onTouched = fn;
+//   }
+
+//   uploadImage(event:any){
+
+//     const files: File[] = Array.from((event.target as HTMLInputElement).files as FileList);
+
+//     this._fileService.upload(files)
+//     .subscribe({
+//       next:  (file) => {
+//         this.value.push(file);
        
-      },
-      complete: () => {
-        this.writeValue(this.value);
-      },
+//       },
+//       complete: () => {
+//         this.writeValue(this.value);
+//       },
 
-    })
-  }
+//     })
+//   }
 
-
+// ПОПЫТКА НОМЕР1
 // @Output() onUpload = new EventEmitter<string>();
 // inProgress = false;
 
@@ -76,6 +94,3 @@ export class AddImageComponent implements ControlValueAccessor{
 //        });
 // }
 
-
-  
-}

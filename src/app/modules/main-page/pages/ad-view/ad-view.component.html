@@ -14,7 +14,8 @@
         <div class="block">
             <h4>Адрес</h4>
             <p>{{advert.address}}</p>
-            <a class="link">
+            <a class="link" 
+            (click)="openMap(advert.address)">
                 Открыть на карте
                 <i class="pi pi-external-link"></i>
               </a>      

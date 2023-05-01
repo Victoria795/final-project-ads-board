@@ -1,4 +1,29 @@
- <input 
+<p-fileUpload 
+[showCancelButton]="false"
+[showUploadButton]="false"
+[customUpload]="true"
+[fileLimit]="10" 
+[previewWidth]="160"
+(onUpload)="onUpload($event)" 
+[multiple]="true" 
+accept=".jpg,.jpeg,.png"
+chooseIcon="pi pi-images"
+chooseLabel="Добавить картинки"
+class="upload-container"
+>
+<ng-template pTemplate="toolbar">
+    <div>
+      Максимум 10 картинок в формате jpg, jpeg или png
+    </div>
+</ng-template>
+<ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }}</li>
+        </ul>
+</ng-template>
+</p-fileUpload>
+
+ <!-- <input 
     class="file-input"
     type="file" 
     accept=".png, .jpg, .jpeg"
@@ -14,5 +39,5 @@ styleClass="p-button-sm"
 <div class="description">
     Максимум 10 картинок в формате jpeg, png или heic
 </div>
-</div>
+</div> -->
 
