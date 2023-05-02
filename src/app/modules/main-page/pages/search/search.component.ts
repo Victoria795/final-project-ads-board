@@ -9,8 +9,7 @@ import { ILoading } from 'src/app/interfaces/i-loading';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit{
-
-  cities:any = [];
+  sortOptions:any = [];
 
   public loading$ = new BehaviorSubject<ILoading>({
     isLoading: true,
@@ -29,12 +28,10 @@ export class SearchComponent implements OnInit{
           ads: response
         }) 
     })
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
+    this.sortOptions = [
+      { name: 'Новизне' },
+      { name: 'Категории' },
+      { name: 'Стоимости' },
   ];
   }
 }
