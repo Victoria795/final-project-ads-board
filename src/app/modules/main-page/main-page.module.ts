@@ -15,6 +15,8 @@ import { CurrencyPipe } from '@angular/common';
 import { SearchComponent } from './pages/search/search.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { TreeModule } from 'primeng/tree';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { InputTextModule } from 'primeng/inputtext';
     GalleriaComponentModule,
     DropdownModule,
     KeyFilterModule,
-    InputTextModule
+    InputTextModule,
+    BreadcrumbModule,
+    TreeModule
   ],
   providers: [ CurrencyPipe ]
 })

@@ -25,8 +25,8 @@ export class AdvertService {
     const body = {
       name: advert.name,
       description: advert.description,
-      categoryId: 'ff1737cc-67a1-4c2c-b9f4-9603465c1633',
-      imageUrl: 'https://sportishka.com/uploads/posts/2021-12/1639134195_33-sportishka-com-p-mashini-raznikh-marok-sport-krasivo-foto-34.jpg',
+      categoryId: advert.category.id,
+      imageUrl: 'https://automobile-zip.ru/wp-content/uploads/8/1/c/81ca46ea233676020ba3a99d920c5dee.jpeg',
       price: advert.price,
       address: advert.address
     }

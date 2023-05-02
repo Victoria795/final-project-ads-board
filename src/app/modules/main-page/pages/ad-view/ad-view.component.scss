@@ -3,6 +3,9 @@
   padding: 0 8px;
   font-size: 16px;
   color: #64748B;
+  ::ng-deep .p-breadcrumb{
+    border: none;
+  }
 }
 .name, .price{
     margin-bottom: 16px; 

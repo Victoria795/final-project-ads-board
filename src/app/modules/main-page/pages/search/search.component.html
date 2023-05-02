@@ -27,7 +27,10 @@
                       <span class="title">Всего найдено 1 234 объявления</span>
                       <div class="sort-block">
                         <span class="sort">Сортировка по</span>
-                        <p-dropdown [options]="cities" optionLabel="name"></p-dropdown>
+                        <p-dropdown 
+                        [options]="sortOptions"
+                        [editable]="false" 
+                        optionLabel="name"></p-dropdown>
                       </div>
                   </div>
               </div>

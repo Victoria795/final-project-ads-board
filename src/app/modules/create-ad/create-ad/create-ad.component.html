@@ -1,5 +1,5 @@
 <h2>Новое объявление</h2>
-<form [formGroup]="form" (ngSubmit)="createAd()">
+<form [formGroup]="form" (ngSubmit)="createAd()" >
     <div class="grid">
         <div class="col-4">
             <label class="required">Выберите категорию</label>
@@ -8,7 +8,7 @@
             [options]="categories"
             optionLabel="name"
             optionGroupLabel="name"
-            [optionGroupChildren]="['subCategories']"
+            [optionGroupChildren]="['child']"
             placeholder="Нажмите, чтобы выбрать"
             formControlName="category">
             </p-cascadeSelect>
@@ -59,9 +59,6 @@
             placeholder="Начните вводить адрес"
             id="address"
             formControlName="address"/>
-            <div *ngIf="form.controls['address'].errors?.['minlength']" class="warning">
-                Адрес должен содержать не менее 3 символов
-            </div>
             <div *ngIf="form.controls['address'].errors?.['maxlength']" class="warning">
                 Адрес должен содержать не более 250 символов
             </div>

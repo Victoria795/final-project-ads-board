@@ -6,6 +6,7 @@ import { Observable, tap } from 'rxjs';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { ActivatedRoute } from '@angular/router';
 import { IFullAd } from 'src/app/interfaces/i-full-ad';
+import { MenuItem } from 'primeng/api';
 
 
 @Component({
@@ -14,9 +15,11 @@ import { IFullAd } from 'src/app/interfaces/i-full-ad';
   styleUrls: ['./ad-view.component.scss'],
 })
 export class AdViewComponent implements OnInit{
+
 public advert$: Observable<IFullAd> | undefined;
 public id: string = '';
 public images: any = false;
+public advert:any;
 
 constructor(
   private _dialogService: DialogService,
@@ -34,16 +37,21 @@ showUserNumber(){
 }
 
 openMap(address:string){
-  const url = `https://yandex.com/maps/?text=${encodeURIComponent(address)}`;
-  window.open(url, '_blank');
+  const mapUrl = `https://yandex.com/maps/?text=${encodeURIComponent(address)}`;
+  window.open(mapUrl, '_blank');
 }
 
+items!: MenuItem[];
+home!: MenuItem;
+
 public ngOnInit() {
+  this.id = this._activatedRoute.snapshot.params['id'];
+  this.advert$ = this._advertService.getAdvertById(this.id)
 
-    this.id = this._activatedRoute.snapshot.params['id'];
-    this.advert$ = this._advertService.getAdvertById(this.id);
-
-    this.images = [
+  this.items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' },];
+  this.home = { icon: 'pi pi-home', routerLink: '/' }
+  
+  this.images = [
         {
           src: 'https://i.pinimg.com/originals/42/67/3e/42673e608003f60330c9cb36c1f7ff90.jpg',
         },

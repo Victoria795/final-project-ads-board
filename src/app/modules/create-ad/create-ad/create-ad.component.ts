@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { YaApiLoaderService } from 'angular8-yandex-maps';
+import { CategoryService } from 'src/app/core/services/category.service';
+
 
 
 @Component({
@@ -10,61 +12,37 @@ import { YaApiLoaderService } from 'angular8-yandex-maps';
   styleUrls: ['./create-ad.component.scss']
 })
 export class CreateAdComponent implements OnInit{
+  categories:any;
 
   constructor(private _advertService: AdvertService,
-              private _yaApiLoaderService: YaApiLoaderService) {}
+              private _yaApiLoaderService: YaApiLoaderService,
+              private _categoryService: CategoryService) {
+              }
   
   ngOnInit(): void {
     this._yaApiLoaderService.load().subscribe((ymaps) => {
-      new ymaps.SuggestView('address');
+    const suggest = new ymaps.SuggestView('address');
+    suggest.events.add('select', e => {
+      let addr = e.get('item').value;
+      this.form.patchValue({
+        address: addr
+      })
     });
+    });
+    this._categoryService.getCategories()
+    .subscribe((response) => {
+    this.categories = response;
+    })
   }
-
+  
   form:FormGroup = new FormGroup({
     category: new FormControl<string>('',[Validators.required]),
     name: new FormControl<string>('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
     description: new FormControl<string | null>(null, [Validators.minLength(10), Validators.maxLength(100)]),
-    address: new FormControl<string>('', [Validators.required, Validators.minLength(3), Validators.maxLength(250)]),
+    address: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(250)]),
     images: new FormControl<[[]] | null>(null),
     price: new FormControl<number | null>(null),
   })
-
-  categories = [
-    {
-      id:'auto',
-      name:'Автомобили',
-      parentId:'none',
-      subCategories:[
-        {
-          id:'fvdrkvg',
-          name:'Легковые',
-          parentId:'aba'
-        },
-        {
-          id:'dffdvkgfk',
-          name:'Грузовые',
-          parentId:'auto'
-        },
-      ]
-    },
-    {
-      id:'ele',
-      name:'Электроника',
-      parentId:'none',
-      subCategories:[
-        {
-          id:'fvjjjfm',
-          name:'Процессор',
-          parentId:'ele'
-        },
-        {
-          id:'sfvksf',
-          name:'Телефон',
-          parentId:'ele'
-        },
-      ]
-    } 
-    ]
 
   createAd() {
   this.form.markAllAsTouched();
