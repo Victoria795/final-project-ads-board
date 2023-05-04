@@ -28,21 +28,11 @@ export class AuthService {
     }
     return this._http
     .post(`${this.endpoint}/register`, body)
-    .pipe(catchError((err) => {
-      this._messageService.add({severity: 'error', summary: 'Не удалось зарегистрироваться. Попробуйте еще раз'});
-    console.log(err)
-    return throwError(err);
-  }))
   }
   // Вход
   logIn(user: IUser) {
     return this._http
       .post<any>(`${this.endpoint}/login`, user)
-      .pipe(catchError((err) => {
-          this._messageService.add({severity: 'error', summary: 'Не удалось авторизоваться. Попробуйте еще раз'});
-        console.log(err)
-        return throwError(err);
-      }))
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res);
         this._isLogginedSubject.next(true);

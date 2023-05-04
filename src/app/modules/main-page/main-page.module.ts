@@ -8,7 +8,7 @@ import { MainPageRoutingModule } from './main-page-routing.module';
 import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
 import { CardComponentModule } from 'src/app/shared/components/card/card.component';
 import { AdViewComponent } from './pages/ad-view/ad-view.component';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { UserNumberModalComponentModule } from 'src/app/modals/user-number-modal/user-number-modal.component';
 import { GalleriaComponentModule } from 'src/app/shared/components/galleria/galleria.component';
 import { CurrencyPipe } from '@angular/common';
@@ -38,7 +38,8 @@ import { TreeModule } from 'primeng/tree';
     KeyFilterModule,
     InputTextModule,
     BreadcrumbModule,
-    TreeModule
+    TreeModule,
+    NgFor
   ],
   providers: [ CurrencyPipe ]
 })
