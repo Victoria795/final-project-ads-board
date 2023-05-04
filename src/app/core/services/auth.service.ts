@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { IUser } from 'src/app/interfaces/i-user';
+import { IUser } from 'src/app/shared/interfaces/i-user';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';

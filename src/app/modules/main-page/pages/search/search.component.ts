@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AdvertService } from 'src/app/core/services/advert.service';
-import { ILoading } from 'src/app/interfaces/i-loading';
+import { ILoading } from 'src/app/shared/interfaces/i-loading';
 
 @Component({
   selector: 'app-search',

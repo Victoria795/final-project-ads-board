@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { IAd } from 'src/app/interfaces/i-ad';
-import { IFullAd } from 'src/app/interfaces/i-full-ad';
+import { IAd } from 'src/app/shared/interfaces/i-ad';
+import { IFullAd } from 'src/app/shared/interfaces/i-full-ad';
 import { MessageService } from 'primeng/api';
 
 @Injectable({

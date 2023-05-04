@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IAd } from 'src/app/interfaces/i-ad';
+import { IAd } from 'src/app/shared/interfaces/i-ad';
 
 @Component({
   selector: 'app-my-ads',

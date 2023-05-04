@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { IAd } from 'src/app/interfaces/i-ad';
+import { IAd } from 'src/app/shared/interfaces/i-ad';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DatePipe } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';

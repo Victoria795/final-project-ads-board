@@ -6,6 +6,7 @@ import { NgIf, NgFor } from '@angular/common';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 
 @Component({
@@ -27,7 +28,8 @@ public toggleFilter():void {
     NgIf, 
     NgFor,
     AsyncPipe,
-    RouterLink
+    RouterLink,
+    NgClass
   ],
   exports: [SearchPanelComponent, FilterComponent],
   providers: [CategoryService],

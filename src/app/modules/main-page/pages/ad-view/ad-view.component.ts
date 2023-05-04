@@ -5,7 +5,7 @@ import { UserNumberModalComponent } from 'src/app/modals/user-number-modal/user-
 import { Observable, tap } from 'rxjs';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { ActivatedRoute } from '@angular/router';
-import { IFullAd } from 'src/app/interfaces/i-full-ad';
+import { IFullAd } from 'src/app/shared/interfaces/i-full-ad';
 import { MenuItem } from 'primeng/api';
 
 

@@ -2,7 +2,8 @@
     <div class="grid">
         <div class="col-3 parent-category__container">
              <ng-container *ngFor="let rootCategory of categories">
-                <div class="parent-category" (click)="selectCategory(rootCategory)">
+                <div class="parent-category"
+                (click)="selectCategory(rootCategory)">
                  {{rootCategory.name}}<i class ="pi pi-chevron-right"></i>
                 </div>
              </ng-container>

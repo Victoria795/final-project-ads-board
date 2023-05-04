@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { ICategory } from 'src/app/interfaces/i-category';
+import { ICategory } from 'src/app/shared/interfaces/i-category';
 
 
 @Component({

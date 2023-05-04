@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { BehaviorSubject } from 'rxjs';
-import { ILoading } from 'src/app/interfaces/i-loading';
+import { ILoading } from 'src/app/shared/interfaces/i-loading';
 
 @Component({
   selector: 'app-recommendations',
