@@ -17,4 +17,10 @@ export class FileService {
 
     return this._http.post<string>('', formData);
 }
+  // upload(file: File): Observable<string> {
+    //     const formData = new FormData();
+    //     formData.append('file', file, file.name);
+
+    //     return this._http.post<string>('', formData);
+    // }
 }

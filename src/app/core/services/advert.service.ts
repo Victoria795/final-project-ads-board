@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { IAd } from 'src/app/interfaces/i-ad';
 import { IFullAd } from 'src/app/interfaces/i-full-ad';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AdvertService {
 
   endpoint: string = '/api/Advert';
 
-  constructor( private _http: HttpClient) { }
+  constructor( private _http: HttpClient, private _messageService:MessageService) { }
 
   getAdverts():Observable<IAd[]>{
     return this._http.get<IAd[]>(`${this.endpoint}`)
@@ -30,6 +31,6 @@ export class AdvertService {
       price: advert.price,
       address: advert.address
     }
-    return this._http.post<any>(`${this.endpoint}`, body).subscribe();
-  }
+    return this._http.post<any>(`${this.endpoint}`, body)
+}
 }

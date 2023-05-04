@@ -59,6 +59,7 @@
             placeholder="Начните вводить адрес"
             id="address"
             formControlName="address"/>
+
             <div *ngIf="form.controls['address'].errors?.['maxlength']" class="warning">
                 Адрес должен содержать не более 250 символов
             </div>
@@ -66,7 +67,8 @@
     </div>
     <app-add-image 
     formControlName="images" 
-    class="col-8 add-image">
+    class="col-8 add-image"
+    ngDefaultControl>
     </app-add-image>
     <div class="grid">
         <div class="col-3">

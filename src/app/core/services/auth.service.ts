@@ -4,6 +4,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +15,7 @@ export class AuthService {
   private _isLogginedSubject: BehaviorSubject<boolean>;
   public isLoggined$:Observable<boolean>;
   
-  constructor(private _http: HttpClient, public router: Router) {
+  constructor(private _http: HttpClient, public router: Router, public _messageService:MessageService) {
     this._isLogginedSubject = new BehaviorSubject<boolean>(this.isLoggined);
   this.isLoggined$ = this._isLogginedSubject.asObservable();
   }
@@ -27,16 +28,26 @@ export class AuthService {
     }
     return this._http
     .post(`${this.endpoint}/register`, body)
-    .pipe(catchError(this.handleError));
+    .pipe(catchError((err) => {
+      this._messageService.add({severity: 'error', summary: 'Не удалось зарегистрироваться. Попробуйте еще раз'});
+    console.log(err)
+    return throwError(err);
+  }))
   }
   // Вход
   logIn(user: IUser) {
     return this._http
       .post<any>(`${this.endpoint}/login`, user)
+      .pipe(catchError((err) => {
+          this._messageService.add({severity: 'error', summary: 'Не удалось авторизоваться. Попробуйте еще раз'});
+        console.log(err)
+        return throwError(err);
+      }))
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res);
-        this._isLogginedSubject.next(true)
-      });     
+        this._isLogginedSubject.next(true);
+        this._messageService.add({severity: 'success', summary: 'Вы успешно авторизовались'});
+      });    
   }
   getToken() {
     return localStorage.getItem('access_token');
@@ -52,18 +63,5 @@ export class AuthService {
       if (removeToken == null) {
         this.router.navigate(['']);
     }
-  }
-  // Error
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(msg)
-    return throwError(msg);
   }
 }

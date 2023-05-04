@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { YaApiLoaderService } from 'angular8-yandex-maps';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -16,7 +17,8 @@ export class CreateAdComponent implements OnInit{
 
   constructor(private _advertService: AdvertService,
               private _yaApiLoaderService: YaApiLoaderService,
-              private _categoryService: CategoryService) {
+              private _categoryService: CategoryService,
+              private _messageService: MessageService) {
               }
   
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class CreateAdComponent implements OnInit{
     name: new FormControl<string>('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
     description: new FormControl<string | null>(null, [Validators.minLength(10), Validators.maxLength(100)]),
     address: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(250)]),
-    images: new FormControl<[[]] | null>(null),
+    images: new FormControl<string | null>(null),
     price: new FormControl<number | null>(null),
   })
 
@@ -50,7 +52,12 @@ export class CreateAdComponent implements OnInit{
       return;
   }
   const advert = this.form.value;
-  this._advertService.createAdvert(advert);
+  this._advertService.createAdvert(advert).subscribe({
+    next: () => {
+      this._messageService.add({severity: 'success', summary: 'Объявление успешно создано'});
+    }
+  }
+  );
   console.log('SUBMIT', advert);
   this.form.reset();
   }

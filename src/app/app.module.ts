@@ -15,6 +15,9 @@ import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AngularYandexMapsModule, YaConfig } from "angular8-yandex-maps";
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { MessageService } from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 
 const mapConfig: YaConfig = {
     apikey: '717ccef5-a34f-42fa-882d-fc2791edda51',
@@ -30,7 +33,11 @@ registerLocaleData(localeRu);
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
-          }
+          },
+        { provide: HTTP_INTERCEPTORS, 
+          useClass: ErrorInterceptor, 
+          multi: true },
+          MessageService
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -44,6 +51,7 @@ registerLocaleData(localeRu);
         MyAdsModule,
         MySettingsModule,
         HttpClientModule,
+        ToastModule,
         AngularYandexMapsModule.forRoot(mapConfig)
     ],
 })

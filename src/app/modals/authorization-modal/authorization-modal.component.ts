@@ -8,6 +8,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { NgClass } from '@angular/common';
 import { DynamicDialogComponent } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-authorization-modal',
@@ -29,7 +30,8 @@ export class AuthorizationModalComponent {
 
 constructor(
   private _dynamicDialogue: DynamicDialogComponent,
-  private _authService: AuthService
+  private _authService: AuthService,
+  private _messageService: MessageService
 ) {}
 
  loginForm: FormGroup = new FormGroup({
@@ -60,7 +62,12 @@ register(){
     return;
   }
   const user = this.registrationForm.value;
-  this._authService.register(user).subscribe();
+  this._authService.register(user).subscribe({
+    next: () => {
+      this._messageService.add({severity: 'success', summary: 'Вы успешно зарегистрировались!'});
+    }
+  }
+  );
   this._dynamicDialogue.close();
 }
 }
@@ -80,3 +87,5 @@ register(){
 export class AuthorizationModalComponentModule {
 
 }
+
+
