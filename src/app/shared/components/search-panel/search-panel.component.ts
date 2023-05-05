@@ -27,10 +27,15 @@ constructor(private _searchService: SearchService,
             private _router: Router){
 }
 search(){
-  this._router.navigateByUrl('search')
-  this._searchService.transformedArray = [];
   this._searchService.value = this.searchTerm;
-  this._searchService.searchAdverts();
+  if(this._searchService.value !== ''){
+    this._router.navigateByUrl('search')
+    this._searchService.transformedArray = [];
+    this._searchService.searchAdverts();
+  }
+ else {
+  this._router.navigateByUrl('');
+ }
 }
 getTerm(term:string){
   this.searchTerm = term;
