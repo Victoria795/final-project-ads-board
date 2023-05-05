@@ -41,4 +41,13 @@ button{
      margin-right: 8px;
     }
 }
+.warning{
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #EF4444;    
+}
+.ng-invalid.ng-touched{
+    border-color: #EF4444;
+}
 

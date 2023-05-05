@@ -61,8 +61,14 @@
         formControlName="name"
         />
         <p 
-        *ngIf="registrationForm.controls['name'].invalid && registrationForm.controls['name'].touched" 
+        *ngIf="registrationForm.controls['name'].errors?.['required'] && registrationForm.controls['name'].touched" 
         class="warning">Введите ваше имя</p>
+        <p *ngIf="registrationForm.controls['name'].errors?.['minlength']" class="warning">
+          Имя должно содержать не менее 3 символов
+        </p>
+        <p *ngIf="registrationForm.controls['name'].errors?.['maxlength']" class="warning">
+          Имя должно содержать не более 32 символов
+        </p>
         </div>
         <div>
         <input

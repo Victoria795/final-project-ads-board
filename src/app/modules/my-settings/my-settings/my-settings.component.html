@@ -1,7 +1,8 @@
 <h3>Настройки</h3>
-<form [formGroup]="settingsForm">
+<form [formGroup]="settingsForm" (ngSubmit)="changeInfo()">
     <div class="grid">
         <div class="col-4 input-group">
+            <div>
             <label>Имя</label>
             <input
             class="input" 
@@ -9,6 +10,16 @@
             pInputText 
             placeholder="Введите имя"
             formControlName="name"/>
+            <p 
+            *ngIf="settingsForm.controls['name'].errors?.['required'] && settingsForm.controls['name'].touched" 
+            class="warning">Введите ваше имя</p>
+            <p *ngIf="settingsForm.controls['name'].errors?.['minlength']" class="warning">
+              Имя должно содержать не менее 3 символов
+            </p>
+            <p *ngIf="settingsForm.controls['name'].errors?.['maxlength']" class="warning">
+              Имя должно содержать не более 32 символов
+            </p>
+        </div>
         </div>
         <div class="col-4 input-group">
             <label>Номер телефона</label>
@@ -22,6 +33,7 @@
     </div>
     <div class="grid">
         <div class="col-8 input-group">
+            <div>
             <label>Адрес <span>(будет указываться в объявлениях по умолчанию)</span></label>
             <input
             class="input" 
@@ -29,20 +41,28 @@
             pInputText 
             placeholder="Не указан"
             formControlName="address"/>
+            <div *ngIf="settingsForm.controls['address'].errors?.['minlength']" class="warning">
+                Адрес должен содержать не менее 3 символов
+            </div>
+            <div *ngIf="settingsForm.controls['address'].errors?.['maxlength']" class="warning">
+                Адрес должен содержать не более 250 символов
+            </div>
+         </div>
         </div>
     </div>
     <div class="footer">
     <button 
         pButton
-        (click)="submit()"
+        type="submit"
         >Сохранить</button>
     <div *ngIf="changesSaved" class="success-notification"><i class="pi pi-check-circle"></i>Изменения сохранены</div>
     </div>
 </form>
 <h3 class="password-heading">Смена пароля</h3>
-<form [formGroup]="changePasswordForm">
+<form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
     <div class="grid">
         <div class="col-4 input-group">
+            <div>
             <label>Текущий пароль</label>
             <input
             class="input" 
@@ -50,10 +70,18 @@
             pInputText 
             placeholder="Введите текущий пароль"
             formControlName="password"/>
+            <p 
+            *ngIf="changePasswordForm.controls['password'].errors?.['required'] && changePasswordForm.controls['password'].touched" 
+            class="warning">Введите текущий пароль</p>
+            <p *ngIf="changePasswordForm.controls['password'].errors?.['minlength']" class="warning">
+            Пароль должен содержать не менее 8 символов
+            </p>
+         </div>
         </div>
     </div>
     <div class="grid">
         <div class="col-4 input-group">
+            <div>
             <label>Новый пароль <span>(минимум 8 символов)</span></label>
             <input
             class="input" 
@@ -61,12 +89,23 @@
             pInputText 
             placeholder="Введите новый пароль"
             formControlName="newPassword"/>
+            <p 
+            *ngIf="changePasswordForm.controls['newPassword'].errors?.['required'] && changePasswordForm.controls['newPassword'].touched" 
+            class="warning">Введите новый пароль</p>
+            <p *ngIf="changePasswordForm.controls['newPassword'].errors?.['minlength']" class="warning">
+            Пароль должен содержать не менее 8 символов
+            </p>
+            <p class="warning"
+            *ngIf="changePasswordForm.errors?.['equalPasswords'] && changePasswordForm.controls['newPassword'].valid">
+            Пароли не должны совпадать!
+            </p>
+           </div>
         </div>
     </div>
     <div class="footer">
     <button 
     pButton
-    (click)="submitPass()"
+    type="submit"
     >Изменить пароль</button>
     <div *ngIf="passwordSaved" class="success-notification"><i class="pi pi-check-circle"></i>Пароль успешно изменен</div>
     </div>
