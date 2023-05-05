@@ -10,6 +10,7 @@ import { NgClass } from '@angular/common';
 import { SearchService } from 'src/app/core/services/search.service';
 import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,9 +23,11 @@ export class SearchPanelComponent {
 public isFilterOpened:boolean = false;
 public searchTerm: string = '';
 
-constructor(private _searchService: SearchService,){
+constructor(private _searchService: SearchService,
+            private _router: Router){
 }
 search(){
+  this._router.navigateByUrl('search')
   this._searchService.transformedArray = [];
   this._searchService.value = this.searchTerm;
   this._searchService.searchAdverts();
