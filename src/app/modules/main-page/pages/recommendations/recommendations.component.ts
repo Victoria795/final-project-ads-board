@@ -3,12 +3,14 @@ import { AdvertService } from 'src/app/core/services/advert.service';
 import { BehaviorSubject } from 'rxjs';
 import { ILoading } from 'src/app/shared/interfaces/i-loading';
 
+
+
 @Component({
   selector: 'app-recommendations',
   templateUrl: './recommendations.component.html',
   styleUrls: ['./recommendations.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-})
+ })
 export class RecommendationsComponent implements OnInit {
 
   public loading$ = new BehaviorSubject<ILoading>({
@@ -25,7 +27,7 @@ export class RecommendationsComponent implements OnInit {
     .subscribe((response) => {
         this.loading$.next({
           isLoading: false,
-          ads: response
+          ads: response.reverse()
         }) 
     })
   }

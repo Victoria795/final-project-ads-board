@@ -7,6 +7,9 @@ import { CategoryService } from 'src/app/core/services/category.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { SearchService } from 'src/app/core/services/search.service';
+import { NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -15,7 +18,21 @@ import { NgClass } from '@angular/common';
   styleUrls: ['./search-panel.component.scss']
 })
 export class SearchPanelComponent {
-public isFilterOpened:boolean = false
+
+public isFilterOpened:boolean = false;
+public searchTerm: string = '';
+
+constructor(private _searchService: SearchService,){
+}
+search(){
+  this._searchService.transformedArray = [];
+  this._searchService.value = this.searchTerm;
+  this._searchService.searchAdverts();
+}
+getTerm(term:string){
+  this.searchTerm = term;
+}
+
 public toggleFilter():void {
    this.isFilterOpened = !this.isFilterOpened
 }
@@ -29,10 +46,11 @@ public toggleFilter():void {
     NgFor,
     AsyncPipe,
     RouterLink,
-    NgClass
+    NgClass,
+    FormsModule
   ],
   exports: [SearchPanelComponent, FilterComponent],
-  providers: [CategoryService],
+  providers: [CategoryService, NgModel],
 })
 
 export class SearchPanelComponentModule {}

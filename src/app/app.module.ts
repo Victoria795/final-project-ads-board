@@ -52,7 +52,7 @@ registerLocaleData(localeRu);
         MySettingsModule,
         HttpClientModule,
         ToastModule,
-        AngularYandexMapsModule.forRoot(mapConfig)
+        AngularYandexMapsModule.forRoot(mapConfig),
     ],
 })
 export class AppModule { }

@@ -5,8 +5,8 @@
     Все категории
     </button>
     <div class="p-inputgroup search">
-        <input type="text" pInputText placeholder="Поиск по объявлениям"/>
-        <button type="button" pButton routerLink="search">
+        <input type="text" pInputText placeholder="Поиск по объявлениям" [(ngModel)]="searchTerm" (input)="getTerm(searchTerm)"/>
+        <button type="button" pButton routerLink="search" (click)="search()">
         Найти
         <i class="pi pi-search"></i>
         </button>

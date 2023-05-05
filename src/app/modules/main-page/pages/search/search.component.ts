@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AdvertService } from 'src/app/core/services/advert.service';
 import { ILoading } from 'src/app/shared/interfaces/i-loading';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-search',
@@ -9,8 +9,10 @@ import { ILoading } from 'src/app/shared/interfaces/i-loading';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit{
-  sortOptions:any = [];
 
+  sortOptions:any = [];
+  value:any = this._searchService.value
+  
   public loading$ = new BehaviorSubject<ILoading>({
     isLoading: true,
     ads: []
@@ -18,20 +20,18 @@ export class SearchComponent implements OnInit{
 
   public skeleton = new Array(20)
 
-  constructor(private _AdvertService: AdvertService) {}
+  constructor(public _searchService: SearchService) {}
 
   public ngOnInit(): void {
-    this._AdvertService.getAdverts()
-    .subscribe((response) => {
-        this.loading$.next({
-          isLoading: false,
-          ads: response
-        }) 
-    })
+  
+    this.loading$.next({
+         isLoading: false,
+         ads: this._searchService.transformedArray
+     })
     this.sortOptions = [
-      { name: 'Новизне' },
-      { name: 'Категории' },
-      { name: 'Стоимости' },
+      { name: 'умолчанию' },
+      { name: 'новизне' },
+      { name: 'возрастанию' },
   ];
   }
 }

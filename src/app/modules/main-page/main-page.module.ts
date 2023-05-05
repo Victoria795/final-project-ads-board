@@ -17,6 +17,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TreeModule } from 'primeng/tree';
+import { FilterService } from 'primeng/api';
 
 
 @NgModule({
@@ -39,8 +40,9 @@ import { TreeModule } from 'primeng/tree';
     InputTextModule,
     BreadcrumbModule,
     TreeModule,
-    NgFor
+    NgFor,
+    
   ],
-  providers: [ CurrencyPipe ]
+  providers: [ CurrencyPipe, FilterService ]
 })
 export class MainPageModule { }
