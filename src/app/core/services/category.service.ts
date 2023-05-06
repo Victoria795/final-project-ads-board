@@ -10,8 +10,8 @@ export class CategoryService {
 
  constructor(private _http: HttpClient) {}
   
-   getCategories():Observable<any>{
-     return this._http.get<any>('/api/Category').pipe(map(res => this.transformCategories(res)))
+   getCategories():Observable<ICategory[]>{
+     return this._http.get<ICategory[]>('/api/Category').pipe(map(res => this.transformCategories(res)))
   } 
   //  private mock = [
   //   {
@@ -116,12 +116,12 @@ export class CategoryService {
   // public getCategories():Observable<any> {
   //   return of(this.mock).pipe(map(res => this.transformCategories(res)))
   //  } 
-  private transformCategories(array: any[]): any {
+  private transformCategories(array: ICategory[]): ICategory[] {
     const rootCategories = array.filter((category) => category.parentId === null
     );
     return this.findSubCategories(rootCategories, array);
    }
-  private findSubCategories(currLevel: any[], array: any[]):any {
+  private findSubCategories(currLevel: any, array: ICategory[]):any {
     const transformedArray = [];
     for (let item of currLevel){
       const child = array.filter((category) => category.parentId === item.id);

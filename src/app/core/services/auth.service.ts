@@ -33,7 +33,7 @@ export class AuthService {
   logIn(user: IUser) {
     return this._http
       .post<any>(`${this.endpoint}/login`, user)
-      .subscribe((res: any) => {
+      .subscribe((res: string) => {
         localStorage.setItem('access_token', res);
         this._isLogginedSubject.next(true);
         this._messageService.add({severity: 'success', summary: 'Вы успешно авторизовались'});

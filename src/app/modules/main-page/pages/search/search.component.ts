@@ -11,7 +11,7 @@ import { SearchService } from 'src/app/core/services/search.service';
 export class SearchComponent implements OnInit{
 
   sortOptions:any = [];
-  value:any = this._searchService.value
+  value:any = this.searchService.value
   
   public loading$ = new BehaviorSubject<ILoading>({
     isLoading: true,
@@ -20,13 +20,13 @@ export class SearchComponent implements OnInit{
 
   public skeleton = new Array(20)
 
-  constructor(public _searchService: SearchService) {}
+  constructor(public searchService: SearchService) {}
 
   public ngOnInit(): void {
   
     this.loading$.next({
          isLoading: false,
-         ads: this._searchService.transformedArray
+         ads: this.searchService.transformedArray
      })
     this.sortOptions = [
       { name: 'умолчанию' },

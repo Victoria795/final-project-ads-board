@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AdvertService } from './advert.service';
 import { FilterService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { IAd } from 'src/app/shared/interfaces/i-ad';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  transformedArray:any = [];
+  transformedArray:IAd[] = [];
   value:string = '';
 
   constructor(private _advertService:AdvertService,
-              private _filterService:FilterService,
-              private _router:Router) { }
+              private _filterService:FilterService) { }
 
   searchAdverts(){
     this._advertService.getAdverts()
