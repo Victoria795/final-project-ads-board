@@ -38,7 +38,7 @@ export class CreateAdComponent implements OnInit{
   }
   
   form:FormGroup = new FormGroup({
-    category: new FormControl<string>('',[Validators.required]),
+    category: new FormControl<string | null>(null,[Validators.required]),
     name: new FormControl<string>('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
     description: new FormControl<string | null>(null, [Validators.minLength(10), Validators.maxLength(100)]),
     address: new FormControl<string>('', [Validators.required, Validators.minLength(1), Validators.maxLength(250)]),

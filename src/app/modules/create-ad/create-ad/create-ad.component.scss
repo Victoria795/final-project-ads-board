@@ -53,6 +53,6 @@ button{
 .ng-invalid.ng-touched{
     border-color: #EF4444;
 }
-::ng-deep .ng-invalid.ng-touched .p-cascadeselect{
+::ng-deep .input-invalid .p-cascadeselect{
     border-color: #EF4444;
 }

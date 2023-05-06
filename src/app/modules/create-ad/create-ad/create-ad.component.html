@@ -10,7 +10,8 @@
             optionGroupLabel="name"
             [optionGroupChildren]="['child']"
             placeholder="Нажмите, чтобы выбрать"
-            formControlName="category">
+            formControlName="category"
+            [ngClass]="{'input-invalid': form.controls['category'].invalid && form.controls['category'].touched}">
             </p-cascadeSelect>
         </div>
     </div>
