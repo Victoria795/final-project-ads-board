@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AdvertService } from './advert.service';
 import { FilterService } from 'primeng/api';
 import { IAd } from 'src/app/shared/interfaces/i-ad';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SearchService {
   searchAdverts(){
     this._advertService.getAdverts()
     .subscribe((response) => {
-    for(let item of response){
+    for(let item of response.reverse()){
     if(this._filterService.filters.contains(item.name, this.value)){
     this.transformedArray.push(item);
     }
@@ -25,5 +26,5 @@ export class SearchService {
     console.log(this.transformedArray)
     return this.transformedArray
   })
-}
+  }
 }

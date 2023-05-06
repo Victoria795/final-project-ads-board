@@ -5,12 +5,23 @@
         <div class="side-bar">
           <h4>Все категории</h4>
           <div class="categories__container">
-            <span class="category">Категория</span>
-            <span class="category">Категория</span>
-            <span class="category">Категория</span>
-            <span class="category">Категория</span>
-            <span class="category">Категория</span>
-            <span class="category">Категория</span>
+            <div class="parent-category__container">
+              <ng-container *ngFor="let rootCategory of categories">
+                <div class="parent-category category">
+                  <i class ="pi pi-chevron-right" (click)="item = !item"></i>{{rootCategory.name}}
+                </div>
+                <ng-container *ngFor="let subcategory of rootCategory.child">
+                <div class="sub-category category" *ngIf="item">
+                  <i class ="pi pi-chevron-right"></i>{{subcategory.name}}
+                </div>
+                <ng-container *ngFor="let child of subcategory?.child">
+                  <div class="sub-sub-category category">
+                  <i class ="pi pi-chevron-right"></i>{{child.name}}
+                  </div>
+                </ng-container>
+               </ng-container>
+             </ng-container>
+            </div>
           </div>
           <h5>Цена</h5>
           <div class="inputs__container">

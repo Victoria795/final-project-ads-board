@@ -10,8 +10,8 @@ import { ICategory } from 'src/app/shared/interfaces/i-category';
 })
 export class FilterComponent implements OnInit{
 
-  categories:any;
-  selectedCategory:any
+  categories!:ICategory[];
+  selectedCategory: any;
   
   constructor(private readonly _categoryService: CategoryService){
   }

@@ -17,7 +17,7 @@ export class AuthService {
   
   constructor(private _http: HttpClient, public router: Router, public _messageService:MessageService) {
     this._isLogginedSubject = new BehaviorSubject<boolean>(this.isLoggined);
-  this.isLoggined$ = this._isLogginedSubject.asObservable();
+    this.isLoggined$ = this._isLogginedSubject.asObservable();
   }
   // Регистрация
   register(user: IUser) {

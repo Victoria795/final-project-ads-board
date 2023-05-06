@@ -23,13 +23,29 @@ h3{
       display: flex;
       flex-direction: column;
       margin-top: 4px;
-      gap: 8px;
       .category{
+        margin: 4px 0;
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
         color: #3B82F6;
         cursor: pointer;
+        .pi{
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        &:hover{
+            color: #EF4444;
+        }
+        &:hover .pi{
+            color: #EF4444;
+        }
+      }
+      .sub-category{
+        margin-left: 20px;
+      }
+      .sub-sub-category{
+        margin-left: 40px;
       }
     }
     .inputs__container{
