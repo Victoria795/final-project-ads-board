@@ -61,4 +61,7 @@ export class CreateAdComponent implements OnInit{
   console.log('SUBMIT', advert);
   this.form.reset();
   }
+  onUpload(guid: string) {
+    this.form.get('images')?.setValue(guid);
+  }
 }

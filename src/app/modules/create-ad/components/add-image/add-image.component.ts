@@ -9,19 +9,22 @@ import { FileService } from 'src/app/core/services/file.service';
 
 export class AddImageComponent {
 
-  @Output() OnUpload = new EventEmitter<string>();
-  uploadedFiles: any[] = [];
+  //для одного файла
 
+  @Output() upload = new EventEmitter<string>();
+  uploadedFile: any;
+  endpoint: string = 'http://90.156.209.122:5000/File/';
   constructor(private _fileService: FileService){}
   
-  onUpload(event: { files: any; }) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-    }
-    this._fileService.upload(this.uploadedFiles)
+  onUpload(event: any) {
+    this.uploadedFile = ((event as HTMLInputElement).files as FileList)[0];
+    // for(let file of event.files) {
+    //     this.uploadedFiles.push(file);
+    // }
+    this._fileService.upload(this.uploadedFile)
     .subscribe({
       next: guid => { 
-        this.OnUpload.emit(guid);
+        this.upload.emit(`${this.endpoint}` + guid);
       },
       error: err => {
         console.log(err)
@@ -29,11 +32,7 @@ export class AddImageComponent {
     })
 }
 
-// @Output() onUpload = new EventEmitter<string>();
-// inProgress = false;
-
-// constructor(private _fileService: FileService){}
-
+// для нескольких файлов, если понадобится
 // uploadImage(event:Event){
 //   const file: any = ((event.target as HTMLInputElement).files as FileList)[0];
 //      this._fileService.upload(file)

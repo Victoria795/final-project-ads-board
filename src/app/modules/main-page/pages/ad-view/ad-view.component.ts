@@ -46,6 +46,7 @@ home!: MenuItem;
 
 public ngOnInit() {
   this.id = this._activatedRoute.snapshot.params['id'];
+  console.log(this.id);
   this.advert$ = this._advertService.getAdvertById(this.id)
 
   this.items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' },];

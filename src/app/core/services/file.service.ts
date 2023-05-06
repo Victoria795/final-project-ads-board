@@ -6,21 +6,21 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class FileService {
-
+//для одного файла
   constructor(private _http: HttpClient) { }
-
   endpoint: string = '/api/File';
-  
-  upload(files: File[]): Observable<string> {
-    const formData = new FormData();
-    files.forEach(file => formData.append('files[]', file, file.name));
+  upload(file: File): Observable<string> {
+         const formData = new FormData();
+         formData.append('file', file, file.name);
+         return this._http.post<string>(`${this.endpoint}`, formData);
+     }
 
-    return this._http.post<string>('', formData);
-}
-  // upload(file: File): Observable<string> {
-    //     const formData = new FormData();
-    //     formData.append('file', file, file.name);
+//для нескольких файлов если понадобится 
+//   upload(files: File[]): Observable<string> {
+//     const formData = new FormData();
+//     files.forEach(file => formData.append('files[]', file, file.name));
 
-    //     return this._http.post<string>('', formData);
-    // }
+//     return this._http.post<string>(`${this.endpoint}`, formData);
+// }
+ 
 }

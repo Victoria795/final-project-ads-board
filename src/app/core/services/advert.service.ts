@@ -27,7 +27,7 @@ export class AdvertService {
       name: advert.name,
       description: advert.description,
       categoryId: advert.category.id,
-      imageUrl: 'https://automobile-zip.ru/wp-content/uploads/8/1/c/81ca46ea233676020ba3a99d920c5dee.jpeg',
+      imageUrl: advert.images,
       price: advert.price,
       address: advert.address
     }

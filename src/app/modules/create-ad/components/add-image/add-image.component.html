@@ -1,14 +1,15 @@
 <p-fileUpload 
 [showCancelButton]="false"
-[showUploadButton]="false"
+[showUploadButton]="true"
 [customUpload]="true"
 [fileLimit]="10" 
 [previewWidth]="160"
-(onUpload)="onUpload($event)" 
+(uploadHandler)="onUpload($event)"
 [multiple]="true" 
 accept=".jpg,.jpeg,.png"
 chooseIcon="pi pi-images"
 chooseLabel="Добавить картинки"
+uploadLabel="Загрузить"
 class="upload-container"
 >
 <ng-template pTemplate="toolbar">
@@ -17,8 +18,8 @@ class="upload-container"
     </div>
 </ng-template>
 <ng-template pTemplate="content">
-        <ul *ngIf="uploadedFiles">
-            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }}</li>
+        <ul *ngIf="uploadedFile">
+            <li>{{ uploadedFile.name }} - {{ uploadedFile.size }}</li>
         </ul>
 </ng-template>
 </p-fileUpload>
