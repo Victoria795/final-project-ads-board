@@ -16,10 +16,9 @@ import { MenuItem } from 'primeng/api';
 })
 export class AdViewComponent implements OnInit{
 
-public advert$: Observable<IFullAd> | undefined;
+public advert: IFullAd | undefined;
 public id: string = '';
 public images: any = false;
-public advert:any;
 
 constructor(
   private _dialogService: DialogService,
@@ -46,8 +45,8 @@ home!: MenuItem;
 
 public ngOnInit() {
   this.id = this._activatedRoute.snapshot.params['id'];
-  console.log(this.id);
-  this.advert$ = this._advertService.getAdvertById(this.id)
+  this._advertService.getAdvertById(this.id).subscribe((res)=>
+  this.advert = res)
 
   this.items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' },];
   this.home = { icon: 'pi pi-home', routerLink: '/' }

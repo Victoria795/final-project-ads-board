@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { UserService } from 'src/app/core/services/user.service';
+import { IUserInfo } from 'src/app/shared/interfaces/i-user-info';
 
 
 @Component({
@@ -7,20 +9,34 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, Valid
   templateUrl: './my-settings.component.html',
   styleUrls: ['./my-settings.component.scss']
 })
-export class MySettingsComponent {
+export class MySettingsComponent implements OnInit{
 
-  settingsForm: FormGroup = new FormGroup({
-    name: new FormControl<string>('Алексей', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
-    phone: new FormControl<string>('',[Validators.required]),
-    address: new FormControl<string>('', [Validators.minLength(3), Validators.maxLength(250)]),
-  })
 
-  changePasswordForm: FormGroup = new FormGroup({
-    password: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
-    newPassword: new FormControl<string>('',[Validators.required, Validators.minLength(8), Validators.maxLength(250)]),
-  }, { validators: MySettingsComponent.passwordsNotEqual })
+user!: IUserInfo;
+settingsForm!: FormGroup;
+changePasswordForm!: FormGroup;
 
-  static passwordsNotEqual: ValidatorFn = (changePasswordForm: AbstractControl): ValidationErrors | null => {
+
+constructor(private _userService:UserService){ }
+
+public ngOnInit(): void {
+  this._userService.getUserInfo().subscribe(
+    (res) => {this.user = res})
+
+    this.settingsForm = new FormGroup({
+      name: new FormControl<string>(this.user.name, [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
+      phone: new FormControl<string>(this.user.phone,[Validators.required]),
+      address: new FormControl<string>(this.user.address, [Validators.minLength(3), Validators.maxLength(250)]),
+    })
+  
+    this.changePasswordForm = new FormGroup({
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
+      newPassword: new FormControl<string>('',[Validators.required, Validators.minLength(8), Validators.maxLength(250)]),
+    }, { validators: MySettingsComponent.passwordsEqual})  
+    
+}
+ 
+  static passwordsEqual: ValidatorFn = (changePasswordForm: AbstractControl): ValidationErrors | null => {
     const password = changePasswordForm.get('password')?.value;
     const newPassword = changePasswordForm.get('newPassword')?.value;
     return password !== newPassword ? null : { equalPasswords: true };

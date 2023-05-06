@@ -1,9 +1,9 @@
 <div class="header">
-<ng-container *ngIf="isLoggined$ | async; else notAuthorised">
+<ng-container *ngIf="isLoggined; else notAuthorised">
     <p-menu #menu [model]="items" [popup]="true" styleClass="menucus"></p-menu>
     <button pButton class="p-button-text user-btn" (click)="menu.toggle($event)">
         <i class="pi pi-user"></i>
-        Алексей
+        {{user.name}}
         <i class="pi pi-chevron-down"></i>
       </button>
     <p-confirmDialog #cd [style]="{width: '50vw'}">

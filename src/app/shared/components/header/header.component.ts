@@ -11,6 +11,9 @@ import { AuthorizationModalComponentModule } from 'src/app/modals/authorization-
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { UserService } from 'src/app/core/services/user.service';
+import { IUserInfo } from '../../interfaces/i-user-info';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -18,15 +21,26 @@ import { ConfirmationService } from 'primeng/api';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
-  isLoggined$ = this._authService.isLoggined$;
+  public user!: IUserInfo;
+  public isLoggined: boolean | undefined;
   
   constructor(
     private _dialogService: DialogService,
     private _authService: AuthService,
     private _confirmationService: ConfirmationService,
+    private _userService: UserService
   ) {}
+
+  public ngOnInit(): void {
+    this._authService.isLoggined$.subscribe(
+      (res) => this.isLoggined = res
+    )
+    this._userService.getUserInfo().subscribe(
+      (res) => this.user = res
+    )
+  }
 
   items: MenuItem[] = [
     {
@@ -54,7 +68,7 @@ export class HeaderComponent {
           return
         }
     });
-} 
+  } 
   showAuthorizationDialog(){
     this._dialogService.open(AuthorizationModalComponent,{
     header: 'Авторизация',
