@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AdvertService } from 'src/app/core/services/advert.service';
-import { BehaviorSubject } from 'rxjs';
-import { ILoading } from 'src/app/shared/interfaces/i-loading';
+import { IAd } from 'src/app/shared/interfaces/i-ad';
 
 
 
@@ -13,22 +12,19 @@ import { ILoading } from 'src/app/shared/interfaces/i-loading';
  })
 export class RecommendationsComponent implements OnInit {
 
-  public loading$ = new BehaviorSubject<ILoading>({
-    isLoading: true,
-    ads: []
-  })
-
+  public isLoading:boolean = true;
+  public ads:IAd[] | undefined;
   public skeleton = new Array(20)
 
-  constructor(private _AdvertService: AdvertService) {}
+  constructor(private _AdvertService: AdvertService,
+              private _cdr: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this._AdvertService.getAdverts()
     .subscribe((response) => {
-        this.loading$.next({
-          isLoading: false,
-          ads: response.reverse()
-        }) 
+          this.ads = response.reverse();
+          this.isLoading = false;
+          this._cdr.markForCheck();
     })
   }
 }

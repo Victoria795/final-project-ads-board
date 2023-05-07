@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DropdownModule } from 'primeng/dropdown';
-
 import { MainPageRoutingModule } from './main-page-routing.module';
 import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
 import { CardComponentModule } from 'src/app/shared/components/card/card.component';
