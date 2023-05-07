@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class SearchService {
 
-  transformedArray:IAd[] = [];
+  transformedArray:IAd[] | undefined;
   searchTerm:string = '';
 
 }

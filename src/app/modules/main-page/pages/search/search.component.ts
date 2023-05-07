@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ILoading } from 'src/app/shared/interfaces/i-loading';
 import { SearchService } from 'src/app/core/services/search.service';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { ICategory } from 'src/app/shared/interfaces/i-category';
-import { AdvertService } from 'src/app/core/services/advert.service';
 
 @Component({
   selector: 'app-search',
@@ -13,23 +9,18 @@ import { AdvertService } from 'src/app/core/services/advert.service';
 })
 export class SearchComponent implements OnInit{
 
-
-  public minPrice:number | null = null;
-  public maxPrice:number | null = null;
-  public sortOptions:any = [];
+  public minPrice!:number;
+  public maxPrice!:number;
+  public sortOptions:Array<object> = [];
   public selectedItem: number | null = null;
-  public loading$ = new BehaviorSubject<ILoading>({
-    isLoading: true,
-    ads: []
-  })
-  skeleton = new Array(20);
-  categories!:any;
+  public skeleton = new Array(20);
+  public categories!:any;
 
   constructor(public searchService: SearchService,
               private _categoryService: CategoryService) {}
    
-  public filterByPrice(minPrice: any,maxPrice: any){
-  this.searchService.transformedArray = this.searchService.transformedArray.filter(advert => {
+  public filterByPrice(minPrice: number,maxPrice: number){
+  this.searchService.transformedArray = this.searchService.transformedArray?.filter(advert => {
     return advert.price >= minPrice
         && advert.price <= maxPrice
   })

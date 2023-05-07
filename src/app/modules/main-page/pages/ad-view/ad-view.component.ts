@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserNumberModalComponent } from 'src/app/modals/user-number-modal/user-number-modal.component';
-import { Observable, tap } from 'rxjs';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { ActivatedRoute } from '@angular/router';
 import { IFullAd } from 'src/app/shared/interfaces/i-full-ad';

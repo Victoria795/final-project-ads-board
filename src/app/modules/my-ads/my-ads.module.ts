@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MyAdsRoutingModule } from './my-ads-routing.module';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { NewAdComponent } from './new-ad/new-ad.component';
@@ -15,7 +14,7 @@ import { CardComponentModule } from 'src/app/shared/components/card/card.compone
   imports: [
     CommonModule,
     MyAdsRoutingModule,
-    CardComponentModule
+    CardComponentModule,
   ]
 })
 export class MyAdsModule { }

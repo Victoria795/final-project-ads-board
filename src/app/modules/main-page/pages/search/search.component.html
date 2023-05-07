@@ -1,4 +1,4 @@
-<ng-container *ngIf="searchService.transformedArray">
+<ng-container *ngIf="searchService.transformedArray; else loading">
   <h3>Объявления по запросу «{{searchService.searchTerm}}»</h3>
   <div class="grid">
       <div class="col-3">
@@ -61,4 +61,69 @@
        </div>
     </div>
 </ng-container>
+<ng-template #loading>
+  <p-skeleton width="40%" height="40px"></p-skeleton>
+  <div class="grid">
+      <div class="col-3">
+        <div class="side-bar">
+          <h4>Все категории</h4>
+          <div class="categories__container">
+            <div class="parent-category__container">
+              <div class="category">
+              <p-skeleton width="70%" height="20px"></p-skeleton>
+              </div>
+              <div class="category">
+                <p-skeleton width="70%" height="20px"></p-skeleton>
+              </div>
+              <div class="category">
+                <p-skeleton width="70%" height="20px"></p-skeleton>
+              </div>
+              <div class="category">
+                <p-skeleton width="70%" height="20px"></p-skeleton>
+              </div>
+              <div class="category">
+                <p-skeleton width="70%" height="20px"></p-skeleton>
+              </div>
+              <div class="category">
+                <p-skeleton width="70%" height="20px"></p-skeleton>
+              </div>
+            </div>
+          </div>
+          <h5>Цена</h5>
+          <div class="inputs__container">
+            <input pInputText 
+            placeholder="Цена от"
+            [(ngModel)]="minPrice" 
+            [pKeyFilter]="'money'"/>
+            <input pInputText  
+            placeholder="до, руб."
+            [(ngModel)]="maxPrice" 
+            [pKeyFilter]="'money'"/>
+          </div>
+          <button pButton>Показать объявления</button>
+        </div>
+      </div>
+      <div class="col-9">
+          <div class="grid">
+              <div class="col-12">
+                  <div class="header">
+                    <p-skeleton width="400px" height="20px"></p-skeleton>
+                      <div class="sort-block">
+                        <span class="sort">Сортировка по</span>
+                        <p-dropdown 
+                        [options]="sortOptions"
+                        [editable]="false" 
+                        optionLabel="name"></p-dropdown>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-4" *ngFor="let item of skeleton">
+                <div>
+                    <app-card></app-card>
+                </div>
+              </div>
+          </div>
+       </div>
+    </div>
+</ng-template>
  
