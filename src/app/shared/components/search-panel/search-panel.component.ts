@@ -11,6 +11,7 @@ import { SearchService } from 'src/app/core/services/search.service';
 import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdvertService } from 'src/app/core/services/advert.service';
 
 
 @Component({
@@ -18,28 +19,32 @@ import { Router } from '@angular/router';
   templateUrl: './search-panel.component.html',
   styleUrls: ['./search-panel.component.scss']
 })
-export class SearchPanelComponent {
+export class SearchPanelComponent{
 
 public isFilterOpened:boolean = false;
 public searchTerm: string = '';
 
 constructor(private _searchService: SearchService,
-            private _router: Router){
+            private _router: Router,
+            private _advertService: AdvertService){
 }
-search(){
-  this._searchService.value = this.searchTerm;
-  if(this._searchService.value !== ''){
-    this._router.navigateByUrl('search')
-    this._searchService.transformedArray = [];
-    this._searchService.searchAdverts();
+
+public filterByName(searchTerm: string){
+  if(searchTerm !== ''){
+    this._searchService.searchTerm = searchTerm;
+    this._advertService.getAdverts().subscribe(
+      (res) => {
+      this._searchService.transformedArray = res.reverse().filter(advert => {
+          return advert.name.toLowerCase().includes(searchTerm.toLowerCase());
+        })
+      }
+    )
+  this._router.navigateByUrl('search');
   }
- else {
-  this._router.navigateByUrl('');
- }
-}
-getTerm(term:string){
-  this.searchTerm = term;
-}
+  else {
+       this._router.navigateByUrl('');
+      }
+  }
 
 public toggleFilter():void {
    this.isFilterOpened = !this.isFilterOpened

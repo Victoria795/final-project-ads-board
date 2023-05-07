@@ -1,17 +1,18 @@
 <ng-container *ngIf="searchService.transformedArray">
-  <h3>Объявления по запросу «{{searchService.value}}»</h3>
+  <h3>Объявления по запросу «{{searchService.searchTerm}}»</h3>
   <div class="grid">
       <div class="col-3">
         <div class="side-bar">
           <h4>Все категории</h4>
           <div class="categories__container">
             <div class="parent-category__container">
-              <ng-container *ngFor="let rootCategory of categories">
+              <ng-container *ngFor="let rootCategory of categories, let i = index">
                 <div class="parent-category category">
-                  <i class ="pi pi-chevron-right" (click)="item = !item"></i>{{rootCategory.name}}
+                  <i class ="pi pi-chevron-right" (click)="selectedItem = i"
+                  ></i>{{rootCategory.name}}
                 </div>
                 <ng-container *ngFor="let subcategory of rootCategory.child">
-                <div class="sub-category category" *ngIf="item">
+                <div class="sub-category category" *ngIf="selectedItem === i">
                   <i class ="pi pi-chevron-right"></i>{{subcategory.name}}
                 </div>
                 <ng-container *ngFor="let child of subcategory?.child">
@@ -25,10 +26,16 @@
           </div>
           <h5>Цена</h5>
           <div class="inputs__container">
-            <input pInputText pKeyFilter="money" placeholder="Цена от"/>
-            <input pInputText pKeyFilter="money" placeholder="до, руб."/>
+            <input pInputText 
+            placeholder="Цена от"
+            [(ngModel)]="minPrice" 
+            [pKeyFilter]="'money'"/>
+            <input pInputText  
+            placeholder="до, руб."
+            [(ngModel)]="maxPrice" 
+            [pKeyFilter]="'money'"/>
           </div>
-          <button pButton>Показать объявления</button>
+          <button pButton (click)="filterByPrice(minPrice,maxPrice)">Показать объявления</button>
         </div>
       </div>
       <div class="col-9">

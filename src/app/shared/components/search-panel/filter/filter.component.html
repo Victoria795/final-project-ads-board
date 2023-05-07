@@ -1,13 +1,17 @@
-<div class="container">
+<div class="container" @categoriesAnimation>
     <div class="grid">
-        <div class="col-3 parent-category__container">
-             <ng-container *ngFor="let rootCategory of categories">
+            <div class="col-3">
+             <ng-container *ngFor="let rootCategory of categories, let i = index">
+              <div class="parent-category__container">
                 <div class="parent-category"
-                (click)="selectCategory(rootCategory)">
+                (click)="selCat = i"
+                (click)="selectCategory(rootCategory)"
+                [ngClass]="selCat === i ? 'parent-category_selected' : ''">
                  {{rootCategory.name}}<i class ="pi pi-chevron-right"></i>
                 </div>
+              </div>
              </ng-container>
-        </div>
+            </div>
         <div class="col-9" *ngIf="selectedCategory">
           <div class="parent-category_name" >
           <span>{{selectedCategory.name}}</span><i class ="pi pi-chevron-right"></i>

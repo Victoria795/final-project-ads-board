@@ -8,10 +8,9 @@
         <input type="text" pInputText 
         placeholder="Поиск по объявлениям" 
         [(ngModel)]="searchTerm" 
-        (input)="getTerm(searchTerm)"
-        (keyup.enter)="search()"/>
+        (keyup.enter)="filterByName(searchTerm)"/>
         <button type="button" pButton 
-        (click)="search()">
+        (click)="filterByName(searchTerm)">
         Найти
         <i class="pi pi-search"></i>
         </button>

@@ -18,6 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TreeModule } from 'primeng/tree';
 import { FilterService } from 'primeng/api';
+import { NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -40,9 +42,9 @@ import { FilterService } from 'primeng/api';
     InputTextModule,
     BreadcrumbModule,
     TreeModule,
-    NgFor,
-    
+    NgFor, 
+    FormsModule
   ],
-  providers: [ CurrencyPipe, FilterService ]
+  providers: [ CurrencyPipe, FilterService, NgModel ]
 })
 export class MainPageModule { }
