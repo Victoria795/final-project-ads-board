@@ -1,21 +1,20 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AdvertService } from './advert.service';
 import { IAd } from 'src/app/shared/interfaces/i-ad';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  changeDetectionEmitter: EventEmitter<void> = new EventEmitter<void>();
+changeDetectionEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-  transformedArray:IAd[] | undefined;
-  searchTerm:string = '';
+public transformedArray:IAd[] | undefined;
+public searchTerm:string = '';
 
-  constructor(private _advertService:AdvertService){}
+constructor(private _advertService:AdvertService){}
 
-  search(){
+search(){
     this._advertService.getAdverts().subscribe(
       (res) => {
       this.transformedArray = res.reverse().filter(advert => {

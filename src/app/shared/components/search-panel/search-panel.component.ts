@@ -11,7 +11,6 @@ import { SearchService } from 'src/app/core/services/search.service';
 import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdvertService } from 'src/app/core/services/advert.service';
 
 
 @Component({
@@ -25,9 +24,7 @@ public isFilterOpened:boolean = false;
 public searchTerm: string = '';
 
 constructor(private _searchService: SearchService,
-            private _router: Router,
-            private _advertService: AdvertService){
-}
+            private _router: Router){}
 
 public filterByName(searchTerm: string){
   if(searchTerm !== ''){
@@ -39,8 +36,6 @@ public filterByName(searchTerm: string){
        this._router.navigateByUrl('');
       }
   }
-
-
 
 public toggleFilter():void {
    this.isFilterOpened = !this.isFilterOpened

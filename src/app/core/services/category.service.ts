@@ -8,11 +8,36 @@ import { ICategory } from 'src/app/shared/interfaces/i-category';
 })
 export class CategoryService {
 
+ private endpoint: string = '/api/Category';
+
  constructor(private _http: HttpClient) {}
   
-   getCategories():Observable<ICategory[]>{
-     return this._http.get<ICategory[]>('/api/Category').pipe(map(res => this.transformCategories(res)))
+  getCategories():Observable<ICategory[]>{
+     return this._http.get<ICategory[]>(`${this.endpoint}`).pipe(map(res => this.transformCategories(res)))
   } 
+  getCategoryById(id:string):Observable<ICategory>{
+    return this._http.get<ICategory>(`${this.endpoint}/`+ id)
+  }
+  getFlatCategories():Observable<ICategory[]>{
+    return this._http.get<ICategory[]>(`${this.endpoint}`)
+  }
+
+  private transformCategories(array: ICategory[]): ICategory[] {
+    const rootCategories = array.filter((category) => category.parentId === null
+    );
+    return this.findSubCategories(rootCategories, array);
+   }
+  private findSubCategories(currLevel: any, array: ICategory[]):any {
+    const transformedArray = [];
+    for (let item of currLevel){
+      const child = array.filter((category) => category.parentId === item.id);
+      item.child = this.findSubCategories(child, array);
+      transformedArray.push(item);
+    }
+    return!
+    transformedArray.length ? null : transformedArray;
+   }
+
   //  private mock = [
   //   {
   //     id: 'f92fed76-9dba-41d8-b3a2-03ae09826484',
@@ -116,19 +141,4 @@ export class CategoryService {
   // public getCategories():Observable<any> {
   //   return of(this.mock).pipe(map(res => this.transformCategories(res)))
   //  } 
-  private transformCategories(array: ICategory[]): ICategory[] {
-    const rootCategories = array.filter((category) => category.parentId === null
-    );
-    return this.findSubCategories(rootCategories, array);
-   }
-  private findSubCategories(currLevel: any, array: ICategory[]):any {
-    const transformedArray = [];
-    for (let item of currLevel){
-      const child = array.filter((category) => category.parentId === item.id);
-      item.child = this.findSubCategories(child, array);
-      transformedArray.push(item);
-    }
-    return!
-    transformedArray.length ? null : transformedArray;
-   }
 }

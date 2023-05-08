@@ -3,19 +3,19 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, Valid
 import { UserService } from 'src/app/core/services/user.service';
 import { IUserInfo } from 'src/app/shared/interfaces/i-user-info';
 
-
 @Component({
   selector: 'app-my-settings',
   templateUrl: './my-settings.component.html',
   styleUrls: ['./my-settings.component.scss']
 })
+
 export class MySettingsComponent implements OnInit{
 
-
-user!: IUserInfo;
-settingsForm!: FormGroup;
-changePasswordForm!: FormGroup;
-
+public user!: IUserInfo;
+public settingsForm!: FormGroup;
+public changePasswordForm!: FormGroup;
+public changesSaved:boolean = false;
+public passwordSaved:boolean = false;
 
 constructor(private _userService:UserService){ }
 
@@ -30,36 +30,33 @@ public ngOnInit(): void {
     })
   
     this.changePasswordForm = new FormGroup({
-      password: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)], ),
       newPassword: new FormControl<string>('',[Validators.required, Validators.minLength(8), Validators.maxLength(250)]),
     }, { validators: MySettingsComponent.passwordsEqual})  
     
 }
  
-  static passwordsEqual: ValidatorFn = (changePasswordForm: AbstractControl): ValidationErrors | null => {
+static passwordsEqual: ValidatorFn = (changePasswordForm: AbstractControl): ValidationErrors | null => {
     const password = changePasswordForm.get('password')?.value;
     const newPassword = changePasswordForm.get('newPassword')?.value;
     return password !== newPassword ? null : { equalPasswords: true };
-  };
+};
 
-  changesSaved:boolean = false;
-  passwordSaved:boolean = false;
-
-  changeInfo() {
+public changeInfo() {
     this.settingsForm.markAllAsTouched();
-    if (this.settingsForm.invalid) {
-      return;
+    if (this.settingsForm.valid) {
+      this.changesSaved = true;
+      console.log('SUBMIT', this.settingsForm.value);
     }
-    this.changesSaved = true;
-    console.log('SUBMIT', this.settingsForm.value);
+    else return
   }
 
-  changePassword() {
+public changePassword() {
     this.changePasswordForm.markAllAsTouched();
-    if (this.changePasswordForm.invalid) {
-      return;
+    if (this.changePasswordForm.valid) {
+      this.passwordSaved = true;
+      console.log('SUBMIT', this.changePasswordForm.value);
     }
-    this.passwordSaved = true;
-    console.log('SUBMIT', this.changePasswordForm.value);
+    else return
   }
 }

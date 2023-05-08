@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserNumberModalComponent } from 'src/app/modals/user-number-modal/user-number-modal.component';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { ActivatedRoute } from '@angular/router';
 import { IFullAd } from 'src/app/shared/interfaces/i-full-ad';
 import { MenuItem } from 'primeng/api';
-
+import { Observable, map, switchMap } from 'rxjs';
+import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
   selector: 'app-ad-view',
@@ -14,17 +15,22 @@ import { MenuItem } from 'primeng/api';
 })
 export class AdViewComponent implements OnInit{
 
-public advert: IFullAd | undefined;
+public advert$: Observable<IFullAd> | undefined;
 public id: string = '';
-public images: any = false;
+public images:any;
+public categoryId: string = '';
+public breadcrumbsArray:Array<Object> = [];
+public items!: MenuItem[];
+public home!: MenuItem;
 
 constructor(
   private _dialogService: DialogService,
   private _advertService: AdvertService,
-  private _activatedRoute: ActivatedRoute
+  private _activatedRoute: ActivatedRoute,
+  private _categoryService: CategoryService,
 ) {  }
 
-showUserNumber(){
+public showUserNumber(){
   this._dialogService.open(UserNumberModalComponent,{
     header: 'Пользователь',
     style: {
@@ -33,20 +39,34 @@ showUserNumber(){
   });
 }
 
-openMap(address:string){
+public openMap(address:string){
   const mapUrl = `https://yandex.com/maps/?text=${encodeURIComponent(address)}`;
   window.open(mapUrl, '_blank');
 }
 
-items!: MenuItem[];
-home!: MenuItem;
+private makeBreadcrumbs(array:any){
+  const currentCategory = array.find((category:any)=> category.id === this.categoryId);
+  this.breadcrumbsArray.push({
+    label: currentCategory.name
+ })
+ const parentCategory = array.find((category:any)=> category.id === currentCategory.parentId);
+ this.breadcrumbsArray.push({
+   label: parentCategory.name
+ })
+ this.breadcrumbsArray.reverse();
+ }
+
 
 public ngOnInit() {
   this.id = this._activatedRoute.snapshot.params['id'];
-  this._advertService.getAdvertById(this.id).subscribe((res)=>
-  this.advert = res)
+  this.advert$ = this._advertService.getAdvertById(this.id)
 
-  this.items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' },];
+  this._advertService.getAdvertById(this.id).subscribe((advert)=> 
+  this.categoryId = advert.categoryId);
+
+  this._categoryService.getFlatCategories().subscribe(res => this.makeBreadcrumbs(res))
+    
+  this.items = this.breadcrumbsArray;
   this.home = { icon: 'pi pi-home', routerLink: '/' }
   
   this.images = [
@@ -66,5 +86,5 @@ public ngOnInit() {
           src: 'https://proprikol.ru/wp-content/uploads/2021/10/krasivye-foto-26.jpg',
         },
       ]
-}
-}
+    }
+  }

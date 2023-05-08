@@ -13,8 +13,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { UserService } from 'src/app/core/services/user.service';
 import { IUserInfo } from '../../interfaces/i-user-info';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-header',
@@ -42,7 +40,7 @@ export class HeaderComponent implements OnInit{
     )
   }
 
-  items: MenuItem[] = [
+  public items: MenuItem[] = [
     {
       label: 'Мои объявления',
       routerLink: '/my-ads'
@@ -57,7 +55,7 @@ export class HeaderComponent implements OnInit{
     }
   ]
 
-  confirmLogOut() {
+  public confirmLogOut() {
     this._confirmationService.confirm({
         message: 'Вы уверены, что хотите выйти?',
         header: 'Подтверждение',
@@ -69,7 +67,7 @@ export class HeaderComponent implements OnInit{
         }
     });
   } 
-  showAuthorizationDialog(){
+  public showAuthorizationDialog(){
     this._dialogService.open(AuthorizationModalComponent,{
     header: 'Авторизация',
     width: '416px',

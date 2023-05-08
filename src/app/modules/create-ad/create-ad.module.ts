@@ -11,10 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddImageComponent } from './components/add-image/add-image.component';
 import { FileUploadModule } from 'primeng/fileupload';
 
-
-
-
-
 @NgModule({
   declarations: [
     CreateAdComponent,

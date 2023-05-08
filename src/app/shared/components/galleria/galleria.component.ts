@@ -8,7 +8,7 @@ import { SkeletonModule } from 'primeng/skeleton';
   styleUrls: ['./galleria.component.scss']
 })
 export class GalleriaComponent {
-  @Input() public images: any;
+  @Input() public images:any;
   public selectedImage: number = 0;
 }
 @NgModule({

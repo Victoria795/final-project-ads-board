@@ -9,8 +9,8 @@ import { MessageService } from 'primeng/api';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = '/api/Account';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private endpoint: string = '/api/Account';
+  public headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   private _isLogginedSubject: BehaviorSubject<boolean>;
   public isLoggined$:Observable<boolean>;
@@ -19,17 +19,17 @@ export class AuthService {
     this._isLogginedSubject = new BehaviorSubject<boolean>(this.isLoggined);
     this.isLoggined$ = this._isLogginedSubject.asObservable();
   }
-  // Регистрация
+  
   register(user: IUser) {
     const body = {
       login: user.login,
       password: user.password,
-      email: user.name
+      email: user.email
     }
     return this._http
     .post(`${this.endpoint}/register`, body)
   }
-  // Вход
+  
   logIn(user: IUser) {
     return this._http
       .post<any>(`${this.endpoint}/login`, user)
@@ -46,7 +46,7 @@ export class AuthService {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
   }
-  //Выход
+  
   logOut() {
       let removeToken = localStorage.removeItem('access_token');
       this._isLogginedSubject.next(false);

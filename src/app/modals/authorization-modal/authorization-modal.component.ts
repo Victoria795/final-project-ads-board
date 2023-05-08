@@ -1,11 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms';
+import { NgIf, NgClass } from '@angular/common';
 import { InputMaskModule } from 'primeng/inputmask';
-import { NgClass } from '@angular/common';
 import { DynamicDialogComponent } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MessageService } from 'primeng/api';
@@ -41,11 +39,11 @@ constructor(
 
 registrationForm: FormGroup = new FormGroup({
   login: new FormControl<string>('',[Validators.required]),
-  name: new FormControl<string>('',[Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
+  email: new FormControl<string>('',[Validators.required, Validators.maxLength(32), Validators.email]),
   password: new FormControl<string>('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
 })
 
-logIn(){
+public logIn(){
   this.loginForm.markAllAsTouched();
   if(this.loginForm.invalid){
     return
@@ -55,8 +53,7 @@ logIn(){
   this._dynamicDialogue.close();
 }
 
-
-register(){
+public register(){
   this.registrationForm.markAllAsTouched();
   if (this.registrationForm.invalid) {
     return;

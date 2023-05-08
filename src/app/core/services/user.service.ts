@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 })
 export class UserService {
 
-  constructor() { }
+  constructor() {}
 
   public mock = {
     name: 'Виктория',
@@ -18,5 +18,4 @@ export class UserService {
   public getUserInfo():Observable<any> {
     return of(this.mock).pipe()
   } 
-
 }

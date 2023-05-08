@@ -1,5 +1,5 @@
 <div class="grid">
-<ng-container *ngIf="advert; else skeleton">
+<ng-container *ngIf="advert$ | async as advert; else skeleton">
     <div class="breadcrumbs col-12">
         <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
     </div>

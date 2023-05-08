@@ -57,17 +57,17 @@
         <input
         type="text"
         pInputText
-        placeholder="Имя"
-        formControlName="name"
+        placeholder="E-mail"
+        formControlName="email"
         />
         <p 
-        *ngIf="registrationForm.controls['name'].errors?.['required'] && registrationForm.controls['name'].touched" 
-        class="warning">Введите ваше имя</p>
-        <p *ngIf="registrationForm.controls['name'].errors?.['minlength']" class="warning">
-          Имя должно содержать не менее 3 символов
+        *ngIf="registrationForm.controls['email'].errors?.['required'] && registrationForm.controls['email'].touched" 
+        class="warning">Введите ваше e-mail</p>
+        <p *ngIf="registrationForm.controls['email'].errors?.['email']" class="warning">
+          Недопустимый формат
         </p>
-        <p *ngIf="registrationForm.controls['name'].errors?.['maxlength']" class="warning">
-          Имя должно содержать не более 32 символов
+        <p *ngIf="registrationForm.controls['email'].errors?.['maxlength']" class="warning">
+          e-mail должен содержать не более 32 символов
         </p>
         </div>
         <div>

@@ -4,8 +4,7 @@ import { AdvertService } from 'src/app/core/services/advert.service';
 import { YaApiLoaderService } from 'angular8-yandex-maps';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { MessageService } from 'primeng/api';
-
-
+import { ICategory } from 'src/app/shared/interfaces/i-category';
 
 @Component({
   selector: 'app-create-ad',
@@ -13,13 +12,13 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./create-ad.component.scss']
 })
 export class CreateAdComponent implements OnInit{
-  categories:any;
+  
+  public categories:ICategory[] = [];
 
   constructor(private _advertService: AdvertService,
               private _yaApiLoaderService: YaApiLoaderService,
               private _categoryService: CategoryService,
-              private _messageService: MessageService) {
-              }
+              private _messageService: MessageService) {}
   
   ngOnInit(): void {
     this._yaApiLoaderService.load().subscribe((ymaps) => {
@@ -46,7 +45,7 @@ export class CreateAdComponent implements OnInit{
     price: new FormControl<number | null>(null),
   })
 
-  createAd() {
+ public createAd() {
   this.form.markAllAsTouched();
   if (this.form.invalid) {
       return;
@@ -61,7 +60,8 @@ export class CreateAdComponent implements OnInit{
   console.log('SUBMIT', advert);
   this.form.reset();
   }
-  onUpload(guid: string) {
+
+ public onUpload(guid: string) {
     this.form.get('images')?.setValue(guid);
   }
 }

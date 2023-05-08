@@ -18,7 +18,7 @@ export class AddImageComponent {
   constructor(private _fileService: FileService,
               private _messageService:MessageService){}
   
-  onUpload(event: any) {
+  public onUpload(event: any) {
     this.uploadedFile = ((event as HTMLInputElement).files as FileList)[0];
     // for(let file of event.files) {
     //     this.uploadedFiles.push(file);
