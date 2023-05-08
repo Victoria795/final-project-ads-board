@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { ICategory } from 'src/app/shared/interfaces/i-category';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { SearchService } from 'src/app/core/services/search.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class FilterComponent implements OnInit{
   selectedCategory: any;
   selCat: number | null = null;
   
-  constructor(private readonly _categoryService: CategoryService){
+  constructor(private _categoryService: CategoryService,
+              private _searchService: SearchService){
   }
   
   ngOnInit():void {

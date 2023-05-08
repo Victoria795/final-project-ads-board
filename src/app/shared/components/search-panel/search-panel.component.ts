@@ -31,20 +31,16 @@ constructor(private _searchService: SearchService,
 
 public filterByName(searchTerm: string){
   if(searchTerm !== ''){
-    this._searchService.searchTerm = searchTerm;
-    this._advertService.getAdverts().subscribe(
-      (res) => {
-      this._searchService.transformedArray = res.reverse().filter(advert => {
-          return advert.name.toLowerCase().includes(searchTerm.toLowerCase());
-        })
-      }
-    )
+  this._searchService.searchTerm = searchTerm;
+  this._searchService.search();
   this._router.navigateByUrl('search');
   }
   else {
        this._router.navigateByUrl('');
       }
   }
+
+
 
 public toggleFilter():void {
    this.isFilterOpened = !this.isFilterOpened

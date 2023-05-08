@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SearchService } from 'src/app/core/services/search.service';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { IAd } from 'src/app/shared/interfaces/i-ad';
 
 @Component({
   selector: 'app-search',
@@ -15,18 +16,29 @@ export class SearchComponent implements OnInit{
   public selectedItem: number | null = null;
   public skeleton = new Array(20);
   public categories!:any;
+  public ads: IAd[] | undefined;
+  public searchTerm: string | undefined;
 
-  constructor(public searchService: SearchService,
-              private _categoryService: CategoryService) {}
+  constructor(private _searchService: SearchService,
+              private _categoryService: CategoryService,
+              private _cdr: ChangeDetectorRef) {}
    
   public filterByPrice(minPrice: number,maxPrice: number){
-  this.searchService.transformedArray = this.searchService.transformedArray?.filter(advert => {
+  this.ads = this._searchService.transformedArray?.filter(advert => {
     return advert.price >= minPrice
         && advert.price <= maxPrice
   })
   }
 
   public ngOnInit(): void {
+
+    this._searchService.changeDetectionEmitter.subscribe(
+      () => {
+        this.searchTerm = this._searchService.searchTerm
+        this.ads = this._searchService.transformedArray
+        this._cdr.detectChanges
+      }
+    )
 
     this._categoryService.getCategories()
     .subscribe((response) => {
