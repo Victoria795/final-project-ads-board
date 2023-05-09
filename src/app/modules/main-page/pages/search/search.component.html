@@ -40,7 +40,7 @@
                         [options]="sortOptions"
                         [editable]="false" 
                         optionLabel="name"
-                        (onChange)="filterByOptions()"></p-dropdown>
+                        (onChange)="filterByOptions($event.value)"></p-dropdown>
                       </div>
                     </ng-container>
                     <ng-template #notFound>
