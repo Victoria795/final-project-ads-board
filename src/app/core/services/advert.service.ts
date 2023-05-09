@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IAd } from 'src/app/shared/interfaces/i-ad';
 import { IFullAd } from 'src/app/shared/interfaces/i-full-ad';
 
@@ -19,6 +19,13 @@ export class AdvertService {
   
   getAdvertById(id:string):Observable<IFullAd>{
     return this._http.get<IFullAd>(`${this.endpoint}/`+ id)
+  }
+
+  getAdvertByCategory(categoryId: string):Observable<IAd[]>{
+    return this._http.get<IAd[]>('/assets/adverts-mock.json').pipe(map((adverts)=>
+    adverts.filter((advert) => advert.categoryId === categoryId
+    )
+   ))
   }
 
   createAdvert(advert: any){

@@ -20,32 +20,15 @@ h3{
       margin-top: 8px;
     }
     .categories__container{
-      display: flex;
-      flex-direction: column;
-      margin-top: 4px;
       .category{
-        margin: 4px 0;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        color: #3B82F6;
-        cursor: pointer;
-        .pi{
-            font-size: 12px;
-            margin-right: 5px;
-        }
-        &:hover{
-            color: #EF4444;
-        }
-        &:hover .pi{
-            color: #EF4444;
-        }
+            margin: 4px 0; 
       }
-      .sub-category{
-        margin-left: 20px;
-      }
-      .sub-sub-category{
-        margin-left: 40px;
+      ::ng-deep .p-tree{
+        border: none;
+        padding: 0px;
+        .pi-chevron-right, .pi-chevron-down, .p-treenode-label{
+            color: #3B82F6;
+          }
       }
     }
     .inputs__container{
@@ -95,5 +78,9 @@ h3{
             width: 200px;
             height: 40px;
         }
+    }
+    .not-found{
+        font-size: 22px;
+        color: #1E293B;
     }
 }

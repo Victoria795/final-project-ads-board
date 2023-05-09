@@ -5,7 +5,6 @@ import { MyAdsComponent } from './my-ads/my-ads.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: MyAdsComponent
   }
 ];

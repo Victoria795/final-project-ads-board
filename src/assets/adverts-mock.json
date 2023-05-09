@@ -1,0 +1,51 @@
+[{
+    "id": "9b70c552-3bee-4c7f-bb3b-b9feda32b7a6",
+    "name": "Военная база",
+    "price": 1000000000,
+    "imageUrl": "http://90.156.209.122:5000/File/8db813ae-68a3-4cd9-a8de-62ca38df8433",
+    "address": "Г. Нигде, ул. Никакая",
+    "createdAt": "2023-04-23T15:04:14.2987Z",
+    "isActive": true,
+    "categoryId": "a3f20979-b3b6-48ed-8c49-f8cbd34a13aa"
+  },
+  {
+    "id": "b3937cbc-4708-4128-8c60-9046fab1b572",
+    "name": "Ваз 2114",
+    "price": 140000,
+    "imageUrl": "http://90.156.209.122:5000/File/329df375-b323-4308-a3c8-211208cf5bc4",
+    "address": "Г. Хабаровск, ул. Ночная",
+    "createdAt": "2023-04-24T06:16:42.355852Z",
+    "isActive": true,
+    "categoryId": "ff1737cc-67a1-4c2c-b9f4-9603465c1633"
+  },
+  {
+    "id": "d4c32ece-46f4-4ed5-b6d3-2941c04d1e15",
+    "name": "Mazda rx-7",
+    "price": 5000000,
+    "imageUrl": "http://90.156.209.122:5000/File/37edece3-0a01-48cd-93f2-06ce989fc3f5",
+    "address": "г. Минск, ул. Ленина д.25",
+    "createdAt": "2023-04-24T10:05:28.51998Z",
+    "isActive": true,
+    "categoryId": "ff1737cc-67a1-4c2c-b9f4-9603465c1633"
+  },
+  {
+    "id": "3b1b07c0-fd4b-4255-9236-46c74c600a87",
+    "name": "Ааааавтомобиль",
+    "price": 200000,
+    "imageUrl": "https://sportishka.com/uploads/posts/2021-12/1639134195_33-sportishka-com-p-mashini-raznikh-marok-sport-krasivo-foto-34.jpg",
+    "address": "г.Севастополь",
+    "createdAt": "2023-04-25T10:00:53.163813Z",
+    "isActive": true,
+    "categoryId": "ff1737cc-67a1-4c2c-b9f4-9603465c1633"
+  },
+  {
+    "id": "f617d374-7984-499c-900f-2664f8c3febb",
+    "name": "Test",
+    "price": 299,
+    "imageUrl": "http://90.156.209.122:5000/File/37edece3-0a01-48cd-93f2-06ce989fc3f5",
+    "address": "Камчатский край, Елизовский р-н, СНТ Дорожник, Солнечная ул., 75",
+    "createdAt": "2023-04-28T07:53:59.42115Z",
+    "isActive": true,
+    "categoryId": "c099a360-b096-4a8f-883a-72c0bc97f8a6"
+  }
+]

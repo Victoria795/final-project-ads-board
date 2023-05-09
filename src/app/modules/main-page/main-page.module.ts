@@ -13,6 +13,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { TreeModule } from 'primeng/tree';
 import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -36,6 +37,7 @@ import { FormsModule } from '@angular/forms';
     KeyFilterModule,
     InputTextModule,
     BreadcrumbModule,
+    TreeModule,
     NgFor, 
     FormsModule
   ],

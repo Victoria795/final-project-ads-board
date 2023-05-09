@@ -44,27 +44,38 @@ public openMap(address:string){
   window.open(mapUrl, '_blank');
 }
 
-private makeBreadcrumbs(array:any){
+ makeBreadcrumbs(array:any){
   const currentCategory = array.find((category:any)=> category.id === this.categoryId);
-  this.breadcrumbsArray.push({
-    label: currentCategory.name
- })
- const parentCategory = array.find((category:any)=> category.id === currentCategory.parentId);
- this.breadcrumbsArray.push({
-   label: parentCategory.name
- })
- this.breadcrumbsArray.reverse();
+  if(currentCategory !== undefined){
+    this.breadcrumbsArray.push({
+      label: currentCategory.name
+   })
+  }
+  else return
+//  const parentCategory = array.find((category:any)=> category.id === currentCategory.parentId);
+//  if(parentCategory !== undefined){
+//   this.breadcrumbsArray.push({
+//     label: parentCategory.name
+//   })
+//  }
+//  else return
+ return this.breadcrumbsArray.reverse();
  }
-
 
 public ngOnInit() {
   this.id = this._activatedRoute.snapshot.params['id'];
-  this.advert$ = this._advertService.getAdvertById(this.id)
+  this.advert$ = this._advertService.getAdvertById(this.id);
+
 
   this._advertService.getAdvertById(this.id).subscribe((advert)=> 
-  this.categoryId = advert.categoryId);
+  {
+  this.categoryId = advert.categoryId;
+  console.log(this.categoryId)
+  });
 
-  this._categoryService.getFlatCategories().subscribe(res => this.makeBreadcrumbs(res))
+  this._categoryService.getFlatCategories().subscribe(res => {
+    this.makeBreadcrumbs(res);
+  })
     
   this.items = this.breadcrumbsArray;
   this.home = { icon: 'pi pi-home', routerLink: '/' }

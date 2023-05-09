@@ -5,5 +5,6 @@ export interface IAd {
     imageUrl: string,
     address: string,
     createdAt: string,
-    isActive: boolean
+    isActive: boolean,
+    categoryId?: string;
 }

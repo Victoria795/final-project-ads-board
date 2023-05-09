@@ -4,26 +4,16 @@
       <div class="col-3">
         <div class="side-bar">
           <h4>Все категории</h4>
-          <div class="categories__container">
-            <div class="parent-category__container">
-              <ng-container *ngFor="let rootCategory of categories, let i = index">
-                <div class="parent-category category">
-                  <i class ="pi pi-chevron-right" (click)="selectedItem = i"
-                  ></i>{{rootCategory.name}}
-                </div>
-                <ng-container *ngFor="let subcategory of rootCategory.child">
-                <div class="sub-category category" *ngIf="selectedItem === i">
-                  <i class ="pi pi-chevron-right"></i>{{subcategory.name}}
-                </div>
-                <ng-container *ngFor="let child of subcategory?.child">
-                  <div class="sub-sub-category category">
-                  <i class ="pi pi-chevron-right"></i>{{child.name}}
-                  </div>
-                </ng-container>
-               </ng-container>
-             </ng-container>
+          <ng-container *ngIf="(categories$ | async) as categories">
+            <div class="categories__container">
+            <p-tree
+              selectionMode="single"
+              [value]="categories"
+              [(selection)]="selectedCategory"
+              (onNodeSelect)="selectCategory()"
+            ></p-tree>
             </div>
-          </div>
+          </ng-container>
           <h5>Цена</h5>
           <div class="inputs__container">
             <input pInputText 
@@ -36,20 +26,26 @@
             [pKeyFilter]="'money'"/>
           </div>
           <button pButton (click)="filterByPrice(minPrice,maxPrice)">Показать объявления</button>
-        </div>
-      </div>
+         </div>
+        </div>  
       <div class="col-9">
           <div class="grid">
               <div class="col-12">
                   <div class="header">
-                      <span class="title">Всего найдено объявлений: {{ads.length}}</span>
+                    <ng-container *ngIf="ads.length > 0; else notFound">
+                      <div class="title">Всего найдено объявлений: {{ads.length}}</div>
                       <div class="sort-block">
                         <span class="sort">Сортировка по</span>
                         <p-dropdown 
                         [options]="sortOptions"
                         [editable]="false" 
-                        optionLabel="name"></p-dropdown>
+                        optionLabel="name"
+                        (onChange)="filterByOptions()"></p-dropdown>
                       </div>
+                    </ng-container>
+                    <ng-template #notFound>
+                    <p class="not-found">По вашему запросу ничего не найдено</p>
+                    </ng-template>
                   </div>
               </div>
               <div class="col-4" *ngFor="let ad of ads">
@@ -70,22 +66,22 @@
           <div class="categories__container">
             <div class="parent-category__container">
               <div class="category">
-              <p-skeleton width="70%" height="20px"></p-skeleton>
+              <p-skeleton width="90%" height="40px"></p-skeleton>
               </div>
               <div class="category">
-                <p-skeleton width="70%" height="20px"></p-skeleton>
+                <p-skeleton width="90%" height="40px"></p-skeleton>
               </div>
               <div class="category">
-                <p-skeleton width="70%" height="20px"></p-skeleton>
+                <p-skeleton width="90%" height="40px"></p-skeleton>
               </div>
               <div class="category">
-                <p-skeleton width="70%" height="20px"></p-skeleton>
+                <p-skeleton width="90%" height="40px"></p-skeleton>
               </div>
               <div class="category">
-                <p-skeleton width="70%" height="20px"></p-skeleton>
+                <p-skeleton width="90%" height="40px"></p-skeleton>
               </div>
               <div class="category">
-                <p-skeleton width="70%" height="20px"></p-skeleton>
+                <p-skeleton width="90%" height="40px"></p-skeleton>
               </div>
             </div>
           </div>

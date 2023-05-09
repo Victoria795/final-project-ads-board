@@ -11,10 +11,11 @@ changeDetectionEmitter: EventEmitter<void> = new EventEmitter<void>();
 
 public transformedArray:IAd[] | undefined;
 public searchTerm:string = '';
+public categoryId:string = '';
 
 constructor(private _advertService:AdvertService){}
 
-search(){
+public search(){
     this._advertService.getAdverts().subscribe(
       (res) => {
       this.transformedArray = res.reverse().filter(advert => {
@@ -24,4 +25,14 @@ search(){
       }
     )
   }
+  
+public filterByCategory(category:any){
+  this._advertService.getAdvertByCategory(category.id).subscribe(
+    (res) => {
+    this.transformedArray = res;
+    this.searchTerm = category.name;
+    this.changeDetectionEmitter.emit();
+    }
+    )
+}
 }

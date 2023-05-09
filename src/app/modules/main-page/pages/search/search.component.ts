@@ -2,32 +2,71 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SearchService } from 'src/app/core/services/search.service';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { IAd } from 'src/app/shared/interfaces/i-ad';
+import { Observable, map } from 'rxjs';
+import { ICategory } from 'src/app/shared/interfaces/i-category';
+import { TreeNode } from 'primeng/api';
+import { AdvertService } from 'src/app/core/services/advert.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit{
+export class SearchComponent implements OnInit {
 
   public minPrice!:number;
   public maxPrice!:number;
   public sortOptions:Array<object> = [];
-  public selectedItem: number | null = null;
   public skeleton = new Array(20);
-  public categories!:any;
+  public categories$!:Observable<any>;
   public ads: IAd[] | undefined;
   public searchTerm: string | undefined;
+  public selectedCategory!: TreeNode;
 
   constructor(private _searchService: SearchService,
               private _categoryService: CategoryService,
-              private _cdr: ChangeDetectorRef) {}
+              private _cdr: ChangeDetectorRef,
+              private _advertService: AdvertService) {}
    
   public filterByPrice(minPrice: number,maxPrice: number){
   this.ads = this._searchService.transformedArray?.filter(advert => {
     return advert.price >= minPrice
         && advert.price <= maxPrice
   })
+  }
+
+  public filterByOptions(){
+  this.ads?.reverse();
+  }
+
+  private transformCategories(categories: ICategory[]): TreeNode[] {
+    const transformedCategories: TreeNode[] = [];
+    categories.forEach((category) => {
+      const node: TreeNode = {
+        key: category.id,
+        label: category.name,
+        selectable: true,
+      };
+
+      if (category.child) {
+        node.children = this.transformCategories(category.child);
+      }
+
+      transformedCategories.push(node);
+    });
+
+    return transformedCategories;
+  }
+
+  public selectCategory(){
+  if(this.selectedCategory.key !== undefined){
+    this._advertService.getAdvertByCategory(this.selectedCategory.key).subscribe(
+      (res) => {
+        this.ads = res
+        this._cdr.detectChanges
+      }
+    )
+  }
   }
 
   public ngOnInit(): void {
@@ -39,20 +78,21 @@ export class SearchComponent implements OnInit{
         this._cdr.detectChanges
       }
     )
-
-    this._categoryService.getCategories()
-    .subscribe((response) => {
-    this.categories = response;
-    console.log(this.categories)
-    })
-
+    
+    this.categories$ = this._categoryService.getCategories().pipe(
+      map((categories:ICategory[]) => this.transformCategories(categories)
+    )
+    );
+ 
     this.sortOptions = [
       { name: 'новизне' },
-      { name: 'дороже' },
-      { name: 'дешевле' },
+      { name: 'сначала старые' },
   ];
   }
-}
+  }
+
+
+
 
 
 
