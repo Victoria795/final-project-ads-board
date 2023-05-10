@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FilterComponent } from './filter/filter.component';
@@ -33,9 +33,14 @@ public filterByName(searchTerm: string){
   this._router.navigateByUrl('search');
   }
   else {
-       this._router.navigateByUrl('');
+       this._router.navigateByUrl('/');
       }
   }
+
+public goHome(){
+  this._router.navigateByUrl('/');
+  this.searchTerm = '';
+}
 
 public toggleFilter():void {
    this.isFilterOpened = !this.isFilterOpened

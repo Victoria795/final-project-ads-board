@@ -13,7 +13,7 @@ export class AddImageComponent {
   //для одного файла
 
   @Output() upload = new EventEmitter<string>();
-  uploadedFile: any;
+  uploadedFile: File | undefined;
   endpoint: string = 'http://90.156.209.122:5000/File/';
   constructor(private _fileService: FileService,
               private _messageService:MessageService){}
@@ -34,7 +34,6 @@ export class AddImageComponent {
       },
     })
 }
-
 // для нескольких файлов, если понадобится
 // uploadImage(event:Event){
 //   const file: any = ((event.target as HTMLInputElement).files as FileList)[0];

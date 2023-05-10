@@ -33,7 +33,6 @@ export class SearchComponent implements OnInit {
     return advert.price >= minPrice
         && advert.price <= maxPrice
   })
-  
   }
 
   public filterByOptions(value:any){
@@ -56,7 +55,7 @@ export class SearchComponent implements OnInit {
   console.log(value);
   
   }
-
+  //делаем из категорий дерево для primeng-tree
   private transformCategories(categories: ICategory[]): TreeNode[] {
     const transformedCategories: TreeNode[] = [];
     categories.forEach((category) => {

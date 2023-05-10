@@ -1,11 +1,30 @@
 .breadcrumbs{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
   margin-top: 32px;
   padding: 0 8px;
   font-size: 16px;
   color: #64748B;
-  ::ng-deep .p-breadcrumb{
-    border: none;
+  .pi-home{
+    cursor: pointer;
+    margin-left: 8px;
   }
+  .pi-home:active{
+    color: #3B82F6;
+  }
+  .crumb{
+    cursor: pointer;
+  }
+  .crumb:before{
+    content: '\2022';
+    margin-right: 8px;
+  }
+}
+.breadcrumbs-skeleton{
+  margin-top: 32px;
+  padding: 0 8px;
 }
 .name, .price{
     margin-bottom: 16px; 

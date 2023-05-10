@@ -5,7 +5,7 @@ import { AdvertService } from 'src/app/core/services/advert.service';
 import { ActivatedRoute } from '@angular/router';
 import { IFullAd } from 'src/app/shared/interfaces/i-full-ad';
 import { MenuItem } from 'primeng/api';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
@@ -13,22 +13,20 @@ import { CategoryService } from 'src/app/core/services/category.service';
   templateUrl: './ad-view.component.html',
   styleUrls: ['./ad-view.component.scss'],
 })
-export class AdViewComponent implements OnInit{
+export class AdViewComponent implements OnInit {
 
 public advert$: Observable<IFullAd> | undefined;
 public id: string = '';
 public images:any;
-public categoryId: string = '';
-public breadcrumbsArray:Array<Object> = [];
 public items!: MenuItem[];
-public home!: MenuItem;
 
 constructor(
   private _dialogService: DialogService,
   private _advertService: AdvertService,
   private _activatedRoute: ActivatedRoute,
   private _categoryService: CategoryService,
-) {  }
+  private _cdr: ChangeDetectorRef
+) { }
 
 public showUserNumber(){
   this._dialogService.open(UserNumberModalComponent,{
@@ -44,42 +42,19 @@ public openMap(address:string){
   window.open(mapUrl, '_blank');
 }
 
- makeBreadcrumbs(array:any){
-  const currentCategory = array.find((category:any)=> category.id === this.categoryId);
-  if(currentCategory !== undefined){
-    this.breadcrumbsArray.push({
-      label: currentCategory.name
-   })
-  }
-  else return
-//  const parentCategory = array.find((category:any)=> category.id === currentCategory.parentId);
-//  if(parentCategory !== undefined){
-//   this.breadcrumbsArray.push({
-//     label: parentCategory.name
-//   })
-//  }
-//  else return
- return this.breadcrumbsArray.reverse();
- }
-
 public ngOnInit() {
+
   this.id = this._activatedRoute.snapshot.params['id'];
   this.advert$ = this._advertService.getAdvertById(this.id);
-
-
-  this._advertService.getAdvertById(this.id).subscribe((advert)=> 
-  {
-  this.categoryId = advert.categoryId;
-  console.log(this.categoryId)
-  });
-
-  this._categoryService.getFlatCategories().subscribe(res => {
-    this.makeBreadcrumbs(res);
-  })
-    
-  this.items = this.breadcrumbsArray;
-  this.home = { icon: 'pi pi-home', routerLink: '/' }
-  
+  this._advertService.getAdvertById(this.id).subscribe((advert) => {
+    let id = advert.categoryId
+    if(id !== undefined){
+      this.items = this._categoryService.makeBreadcrumbs(id);
+    } 
+    this._cdr.detectChanges();
+  }
+  );
+ 
   this.images = [
         {
           src: 'https://i.pinimg.com/originals/42/67/3e/42673e608003f60330c9cb36c1f7ff90.jpg',
@@ -98,4 +73,6 @@ public ngOnInit() {
         },
       ]
     }
-  }
+ }
+
+  

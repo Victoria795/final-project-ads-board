@@ -24,7 +24,7 @@ export class RecommendationsComponent implements OnInit {
     .subscribe((response) => {
           this.ads = response.reverse();
           this.isLoading = false;
-          this._cdr.markForCheck();
+          this._cdr.detectChanges();
     })
   }
 }

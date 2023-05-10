@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { AdvertService } from 'src/app/core/services/advert.service';
 import { YaApiLoaderService } from 'angular8-yandex-maps';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { MessageService } from 'primeng/api';
 import { ICategory } from 'src/app/shared/interfaces/i-category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ad',
   templateUrl: './create-ad.component.html',
-  styleUrls: ['./create-ad.component.scss']
+  styleUrls: ['./create-ad.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateAdComponent implements OnInit{
   
@@ -18,7 +20,8 @@ export class CreateAdComponent implements OnInit{
   constructor(private _advertService: AdvertService,
               private _yaApiLoaderService: YaApiLoaderService,
               private _categoryService: CategoryService,
-              private _messageService: MessageService) {}
+              private _messageService: MessageService,
+              private _router: Router) {}
   
   ngOnInit(): void {
     this._yaApiLoaderService.load().subscribe((ymaps) => {
@@ -51,11 +54,15 @@ export class CreateAdComponent implements OnInit{
       return;
   }
   const advert = this.form.value;
-  this._advertService.createAdvert(advert).subscribe({
-    next: () => {
-      this._messageService.add({severity: 'success', summary: 'Объявление успешно создано'});
-    }
-  }
+  this._advertService.createAdvert(advert).subscribe(
+    (advert) => {
+      this._router.navigateByUrl(`ad-view/${advert.id}`);
+    },
+  //   {
+  //   next: () => {
+  //     this._messageService.add({severity: 'success', summary: 'Объявление успешно создано'});
+  //   }
+  // }
   );
   console.log('SUBMIT', advert);
   this.form.reset();
