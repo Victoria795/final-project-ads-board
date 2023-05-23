@@ -21,13 +21,17 @@ export class ErrorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((err) => {
         let errorMessage = '';
-        if(err.status === 404){
-          this._router.navigateByUrl('**');
-        } else if (err.status === 400 || err.status === 500){
-          this._messageService.add({severity: 'error', summary: 'Ошибка! Попробуйте еще раз'});
-        } else {
-          errorMessage = `Error Status: ${err.status} \n Message: ${err.message}`;
-          this._messageService.add({severity: 'error', summary: errorMessage , detail: ''});
+        switch(err.status){
+          case '404':
+            this._router.navigateByUrl('**');
+          break;
+          case '400':
+          case '500':
+            this._messageService.add({severity: 'error', summary: 'Ошибка! Попробуйте еще раз'});
+          break;
+          default:
+            errorMessage = `Error Status: ${err.status} \n Message: ${err.message}`;
+            this._messageService.add({severity: 'error', summary: errorMessage , detail: ''});
         }
         return throwError(err);
         })
